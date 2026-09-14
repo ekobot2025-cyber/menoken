@@ -66,7 +66,7 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
   const isDashboardView = !isLanding && activeTab !== 'login' && activeTab !== 'market' && activeTab !== 'partner_hub';
 
   const navLinks = [
-    { id: 'hero', label: 'HOME' },
+    { id: 'hero', label: 'BERANDA' },
     { id: 'pillars', label: 'PILAR INTI' },
     { id: 'why', label: 'MENGAPA MENOKEN' },
     { id: 'how-it-works', label: 'CARA KERJA' },
@@ -145,10 +145,14 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
   };
 
   return (
-    <header className={`sticky top-0 z-40 backdrop-blur-md border-b shadow-xs transition-colors duration-200 no-print ${
-      isDark ? 'bg-[#060c18]/95 border-slate-800/80 text-slate-100' : 'bg-white/95 border-slate-200/90 text-slate-900'
+    <header className={`sticky top-0 z-40 backdrop-blur-md shadow-sm transition-colors duration-200 no-print ${
+      isDark ? 'bg-[#060c18]/98 border-slate-800/80 text-slate-100' : 'bg-white/98 border-slate-200 text-slate-900'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-3 sm:gap-6">
+      
+      {/* ========================================================================= */}
+      {/* BARIS 1: BRAND LOGO + WIDE SEARCH BAR + CART & USER ACTIONS              */}
+      {/* ========================================================================= */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-18 flex items-center justify-between gap-3 sm:gap-6">
         
         {/* Left: Mobile Hamburger (on dashboard) + Brand Logo */}
         <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
@@ -187,21 +191,22 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
           </div>
         </div>
 
-        {/* Center-Left: Prominent Agro-Commerce Search Bar */}
-        <div className="flex-1 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-2 sm:mx-4 hidden sm:block">
-          <form onSubmit={handleNavbarSearchSubmit} className="relative w-full">
+        {/* Center: Prominent Agro-Commerce Style Search Bar (Wide, Clean, Generous) */}
+        <div className="flex-1 max-w-md md:max-w-xl lg:max-w-2xl mx-2 sm:mx-6 hidden sm:block">
+          <form onSubmit={handleNavbarSearchSubmit} className="relative w-full flex items-center">
             <input
               type="text"
               value={navbarSearch}
               onChange={(e) => setNavbarSearch(e.target.value)}
-              placeholder="Cari produk, komoditas, atau UMKM..."
-              className={`w-full pl-9 pr-14 py-2 sm:py-2.5 rounded-full text-xs font-semibold border transition-all outline-hidden focus:ring-2 focus:ring-emerald-500/30 ${
+              placeholder="Cari produk desa, UMKM, komoditas, atau kategori..."
+              className={`w-full pl-10 pr-22 py-2 sm:py-2.5 rounded-xl text-xs font-semibold border transition-all outline-hidden focus:ring-2 focus:ring-emerald-500/30 ${
                 isDark
                   ? 'bg-slate-900/90 border-slate-700 text-white placeholder-slate-400 focus:border-emerald-500'
-                  : 'bg-slate-100/90 border-slate-300 text-slate-900 placeholder-slate-500 focus:border-emerald-600 focus:bg-white'
+                  : 'bg-slate-100/90 border-slate-300 text-slate-900 placeholder-slate-500 focus:border-emerald-600 focus:bg-white shadow-xs'
               }`}
             />
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            
             {navbarSearch && (
               <button
                 type="button"
@@ -210,44 +215,24 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
                   localStorage.removeItem('menoken_search_query');
                   window.dispatchEvent(new CustomEvent('menoken-search-update', { detail: '' }));
                 }}
-                className="absolute right-12 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 cursor-pointer p-0.5"
+                className="absolute right-16 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 cursor-pointer p-0.5"
                 title="Hapus pencarian"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
             )}
+
             <button
               type="submit"
-              className="absolute right-1.5 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-black transition cursor-pointer shadow-xs"
+              className="absolute right-1.5 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-lg bg-[#064e3b] hover:bg-emerald-700 text-white text-xs font-bold transition cursor-pointer shadow-xs flex items-center gap-1.5"
             >
-              Cari
+              <Search className="w-3.5 h-3.5" />
+              <span>Cari</span>
             </button>
           </form>
         </div>
 
-        {/* Center: Main Universal Website Navigation Links */}
-        <nav className="hidden xl:flex items-center gap-4 text-xs font-extrabold tracking-wide uppercase">
-          {navLinks.map((link) => {
-            const isLinkActive = isLanding && link.id === 'hero';
-            return (
-              <button
-                key={link.id}
-                onClick={() => handleNavClick(link.id)}
-                className={`transition cursor-pointer py-1 select-none ${
-                  isLinkActive
-                    ? 'text-cyan-400 font-black border-b-2 border-cyan-400'
-                    : isDark
-                      ? 'text-slate-300 hover:text-cyan-300'
-                      : 'text-slate-700 hover:text-cyan-600'
-                }`}
-              >
-                {link.label}
-              </button>
-            );
-          })}
-        </nav>
-
-        {/* Right: Actions, Theme Toggle, and User Auth */}
+        {/* Right: Cart, DB Tool, Theme Toggle & User Profile */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           
           {/* Mobile Menu Dropdown Toggle for screen < lg */}
@@ -265,10 +250,10 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
             <ChevronDown className={`w-3.5 h-3.5 transition-transform ${mobileNavOpen ? 'rotate-180' : ''}`} />
           </button>
 
-                    {/* Shopping Cart Button (Agro-Commerce 35 Feature) */}
+          {/* Shopping Cart Button */}
           <button
             onClick={() => setIsCartOpen(true)}
-            className={`relative flex items-center gap-1.5 px-3 py-1.5 sm:px-3 sm:py-2 rounded-xl border font-bold text-xs transition cursor-pointer group ${
+            className={`relative flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border font-bold text-xs transition cursor-pointer group ${
               isDark
                 ? 'bg-slate-900/90 border-slate-700/80 text-emerald-400 hover:border-emerald-500/60 hover:bg-slate-800'
                 : 'bg-emerald-50 border-emerald-200 text-emerald-800 hover:bg-emerald-100 shadow-xs'
@@ -276,14 +261,14 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
             title="Buka Keranjang Belanja MENOKEN"
           >
             <div className="relative">
-              <ShoppingCart className="w-4 h-4 group-hover:scale-110 transition-transform text-emerald-500" />
+              <ShoppingCart className="w-4 h-4 group-hover:scale-110 transition-transform text-emerald-600 dark:text-emerald-400" />
               {cartCount > 0 && (
                 <span className="absolute -top-2 -right-2 px-1 min-w-[16px] h-4 rounded-full bg-amber-500 text-slate-950 text-[10px] font-black flex items-center justify-center shadow-md animate-pulse">
                   {cartCount}
                 </span>
               )}
             </div>
-            <span className="hidden sm:inline">Keranjang</span>
+            <span className="hidden sm:inline font-bold">Keranjang</span>
             {cartCount > 0 && (
               <span className="hidden sm:inline-block px-1.5 py-0.2 rounded-md bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[10px] font-mono font-black">
                 {cartCount}
@@ -291,23 +276,10 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
             )}
           </button>
 
-          {/* Quick Market Link */}
-          <button
-            onClick={() => setActiveTab('market')}
-            className={`hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border transition cursor-pointer ${
-              activeTab === 'market'
-                ? 'bg-amber-400/20 text-amber-300 border-amber-400/40'
-                : isDark ? 'border-slate-800 text-slate-300 hover:bg-slate-800' : 'border-slate-200 text-slate-700 hover:bg-slate-100'
-            }`}
-          >
-            <Store className="w-3.5 h-3.5 text-amber-400" />
-            <span>Market</span>
-          </button>
-
           {/* Database Backup Tool */}
           <button
             onClick={() => setDbModalOpen(true)}
-            className={`hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border transition cursor-pointer ${
+            className={`hidden sm:flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-xl text-xs font-semibold border transition cursor-pointer ${
               isDark
                 ? 'bg-slate-900/80 text-slate-300 hover:text-white border-slate-700/60 hover:bg-slate-800'
                 : 'bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-100 border-slate-200 shadow-xs'
@@ -315,7 +287,7 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
             title="Kelola & Cadangkan Data"
           >
             <Download className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Data DB</span>
+            <span className="hidden md:inline">Data DB</span>
           </button>
 
           {/* Theme Toggle Button */}
@@ -341,10 +313,10 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
                   const targetView = role === 'student' ? 'student_dashboard' : `${role}_dashboard`;
                   setActiveTab(targetView);
                 }}
-                className="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-md shadow-emerald-950/30 transition cursor-pointer"
+                className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-md shadow-emerald-950/30 transition cursor-pointer whitespace-nowrap"
                 title="Buka Ruang Kerja / Dashboard"
               >
-                <LayoutDashboard className="w-3.5 h-3.5" />
+                <LayoutDashboard className="w-3.5 h-3.5 shrink-0" />
                 <span>Ruang Kerja</span>
               </button>
 
@@ -438,9 +410,9 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
             // Logged Out Button: Toba-Quest Glowing Action
             <button
               onClick={handleOpenLogin}
-              className="px-4 sm:px-5 py-2 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 text-slate-950 font-black text-xs sm:text-sm shadow-lg shadow-cyan-500/30 hover:scale-105 transition-all cursor-pointer flex items-center gap-2"
+              className="px-4 sm:px-5 py-2 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 text-slate-950 font-black text-xs sm:text-sm shadow-lg shadow-cyan-500/30 hover:scale-105 transition-all cursor-pointer flex items-center gap-2 whitespace-nowrap"
             >
-              <Rocket className="w-4 h-4 text-slate-950" />
+              <Rocket className="w-4 h-4 text-slate-950 shrink-0" />
               <span>Masuk / Ruang Kerja</span>
             </button>
           )}
@@ -449,9 +421,67 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
 
       </div>
 
+      {/* ========================================================================= */}
+      {/* BARIS 2: DEEP EMERALD SUB-BAR (AGRO-COMMERCE 35 EXACT 2-TIER DESIGN)       */}
+      {/* ========================================================================= */}
+      <div className={`transition-colors duration-200 border-t ${
+        isDark ? 'bg-[#031d16] border-emerald-950/80 text-white' : 'bg-[#064e3b] border-emerald-800/60 text-white shadow-xs'
+      }`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-10 sm:h-11 flex items-center justify-between gap-4 overflow-x-auto no-scrollbar">
+          
+          {/* Main Website Navigation Links */}
+          <nav className="flex items-center gap-4 sm:gap-6 md:gap-7 text-xs sm:text-[12.5px] font-extrabold tracking-wide uppercase whitespace-nowrap">
+            {navLinks.map((link) => {
+              const isLinkActive = isLanding && link.id === 'hero';
+              return (
+                <button
+                  key={link.id}
+                  onClick={() => handleNavClick(link.id)}
+                  className={`transition cursor-pointer py-1 select-none flex items-center gap-1.5 ${
+                    isLinkActive
+                      ? 'text-amber-300 font-black border-b-2 border-amber-300'
+                      : 'text-emerald-100 hover:text-amber-300'
+                  }`}
+                >
+                  <span>{link.label}</span>
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* Right quick shortcuts inside Baris 2 */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0 whitespace-nowrap text-xs font-bold">
+            <button
+              onClick={() => setActiveTab('market')}
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-lg transition cursor-pointer ${
+                activeTab === 'market'
+                  ? 'bg-amber-400 text-slate-950 font-black shadow-xs'
+                  : 'bg-emerald-800/90 hover:bg-emerald-700 text-white hover:text-amber-200'
+              }`}
+            >
+              <Store className="w-3.5 h-3.5 text-amber-300" />
+              <span>Katalog Market</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('partner_hub')}
+              className={`hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-lg transition cursor-pointer ${
+                activeTab === 'partner_hub'
+                  ? 'bg-cyan-400 text-slate-950 font-black shadow-xs'
+                  : 'bg-emerald-800/90 hover:bg-emerald-700 text-white hover:text-cyan-200'
+              }`}
+            >
+              <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
+              <span>Untuk Mitra & Investor</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
       {/* Mobile Nav Links Drawer (Visible when mobile menu toggle is opened on screens < lg) */}
       {mobileNavOpen && (
-        <div className={`lg:hidden border-t px-4 py-3 space-y-1 backdrop-blur-xl ${
+        <div className={`lg:hidden border-t px-4 py-3 space-y-2 backdrop-blur-xl ${
           isDark ? 'bg-[#060c18]/98 border-slate-800 text-slate-200' : 'bg-white/98 border-slate-200 text-slate-800'
         }`}>
           {/* Mobile Search Bar */}
@@ -502,6 +532,7 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
           <div className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider px-3 py-1">
             Navigasi Platform
           </div>
+
           {navLinks.map((link) => (
             <button
               key={link.id}
@@ -516,6 +547,7 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
               {isLanding && link.id === 'hero' && <span className="w-2 h-2 rounded-full bg-cyan-400"></span>}
             </button>
           ))}
+
           <div className="pt-2 border-t border-slate-800/40 flex items-center justify-between">
             <button
               onClick={() => { setActiveTab('market'); setMobileNavOpen(false); }}
