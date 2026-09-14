@@ -9,8 +9,8 @@ export const Layout = ({ children, activeTab, setActiveTab }) => {
   const { roleInfo } = useAuth();
   const { isDark } = useTheme();
 
-  // If on landing or login page, full width container (no left sidebar, but WITH the unified top navbar!)
-  const isPublicStandalone = activeTab === 'landing' || activeTab === 'login';
+  // If on landing, login, market, or partner hub, full width standalone container (no left sidebar, but WITH the unified top navbar!)
+  const isPublicStandalone = activeTab === 'landing' || activeTab === 'login' || activeTab === 'market' || activeTab === 'partner_hub' || activeTab === 'group_public_profile';
 
   return (
     <div className={`min-h-screen flex flex-col font-sans transition-colors duration-200 ${

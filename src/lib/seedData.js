@@ -594,7 +594,7 @@ export const INITIAL_PRODUCTS = [
     wholesaleMin: 24,
     rating: 4.8,
     reviewsCount: 56,
-    image: "https://images.unsplash.com/photo-1622484216805-4c07a048a121?w=800&auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?w=800&auto=format&fit=crop&q=80",
     description: "Bar energi bebas terigu (gluten-free) terbuat dari pati sagu murni Sentani yang dicampur kacang kenari renyah dan cokelat asli Papua. Sumber karbohidrat kompleks rendah gula yang mengenyangkan lebih lama.",
     legalities: ["NIB", "PIRT"],
     isBestSeller: true,
