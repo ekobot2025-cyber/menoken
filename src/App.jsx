@@ -49,6 +49,7 @@ const AppContent = () => {
   const handleSetActiveTab = (tab) => {
     setActiveTab(tab);
     localStorage.setItem('menoken_active_tab', tab);
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   const renderActiveView = () => {

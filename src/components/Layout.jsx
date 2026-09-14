@@ -9,33 +9,32 @@ export const Layout = ({ children, activeTab, setActiveTab }) => {
   const { roleInfo } = useAuth();
   const { isDark } = useTheme();
 
-  // If on landing or login page, standalone full-bleed dual-sector view (no white navbar, no left sidebar)
+  // If on landing or login page, full width container (no left sidebar, but WITH the unified top navbar!)
   const isPublicStandalone = activeTab === 'landing' || activeTab === 'login';
 
   return (
     <div className={`min-h-screen flex flex-col font-sans transition-colors duration-200 ${
-      isDark ? 'bg-[#0b1220] text-slate-100' : 'bg-slate-50 text-slate-900'
+      isDark ? 'bg-[#060c18] text-slate-100' : 'bg-slate-50 text-slate-900'
     }`}>
-      {!isPublicStandalone && (
-        <Navbar
-          sidebarOpen={sidebarOpen}
-          onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-        />
-      )}
+      {/* Universal Top Navbar visible on EVERY page as requested by user */}
+      <Navbar
+        sidebarOpen={sidebarOpen}
+        onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
 
       {isPublicStandalone ? (
         // Full width container with NO left sidebar on landing & login
         <main className={`flex-1 overflow-y-auto transition-colors duration-200 ${
-          isDark ? 'bg-[#0b1220]' : 'bg-slate-50'
+          isDark ? 'bg-[#060c18]' : 'bg-slate-50'
         }`}>
           {children}
         </main>
       ) : (
         // Authenticated dashboard layout with left sidebar
         <div className={`flex-1 flex overflow-hidden transition-colors duration-200 ${
-          isDark ? 'bg-[#0b1220] text-slate-100' : 'bg-slate-50 text-slate-900'
+          isDark ? 'bg-[#060c18] text-slate-100' : 'bg-slate-50 text-slate-900'
         }`}>
           <Sidebar
             activeTab={activeTab}

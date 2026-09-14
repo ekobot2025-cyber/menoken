@@ -49,6 +49,16 @@ export const LandingPage = ({ setActiveTab }) => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authTab, setAuthTab] = useState('login'); // 'login' | 'register'
 
+  // Listen to open-menoken-auth from Navbar
+  useEffect(() => {
+    const handleOpenAuth = () => {
+      setAuthTab('login');
+      setShowAuthModal(true);
+    };
+    window.addEventListener('open-menoken-auth', handleOpenAuth);
+    return () => window.removeEventListener('open-menoken-auth', handleOpenAuth);
+  }, []);
+
   // Auto-rotating Hero 3D Animation Slides
   const heroSlides = [
     {
@@ -198,89 +208,21 @@ export const LandingPage = ({ setActiveTab }) => {
     }`}>
 
       {/* ========================================================= */}
-      {/* 1. TOP NAVBAR (TOBA-QUEST STYLE)                           */}
+      {/* 1. HERO SECTION (TOBA-QUEST SPACIOUS + ENLARGED SLIDE)    */}
       {/* ========================================================= */}
-      <header className={`sticky top-0 z-40 backdrop-blur-md border-b transition-colors duration-300 ${
-        isDark ? 'bg-[#060c18]/90 border-slate-800/80' : 'bg-white/90 border-slate-200/80'
-      }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
-          
-          {/* Brand Logo */}
-          <div className="flex items-center gap-3 cursor-pointer" onClick={scrollToTop}>
-            <div className="relative flex items-center justify-center w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 border border-emerald-500/30 shadow-md">
-              <img src="/noken_pixar_3d.png" alt="MENOKEN" className="w-7 h-7 object-contain drop-shadow" />
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className={`font-black text-xl sm:text-2xl tracking-tight flex items-center ${isDark ? 'text-white' : 'text-slate-950'}`}>
-                  MENOKEN
-                </span>
-                <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 shadow-sm">
-                  UNCEN
-                </span>
-              </div>
-              <p className="text-[10.5px] font-semibold text-emerald-500 hidden sm:block tracking-wide">
-                UPA Kewirausahaan Universitas Cenderawasih
-              </p>
-            </div>
-          </div>
-
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-7 text-xs sm:text-sm font-bold tracking-wide uppercase">
-            <a href="#hero" className="text-cyan-400 hover:text-cyan-300 transition">Home</a>
-            <a href="#pillars" className={`${isDark ? 'text-slate-300 hover:text-white' : 'text-slate-600 hover:text-slate-950'} transition`}>Pilar Inti</a>
-            <a href="#why" className={`${isDark ? 'text-slate-300 hover:text-white' : 'text-slate-600 hover:text-slate-950'} transition`}>Mengapa Menoken</a>
-            <a href="#how-it-works" className={`${isDark ? 'text-slate-300 hover:text-white' : 'text-slate-600 hover:text-slate-950'} transition`}>Cara Kerja</a>
-            <a href="#commodities" className={`${isDark ? 'text-slate-300 hover:text-white' : 'text-slate-600 hover:text-slate-950'} transition`}>Komoditas</a>
-            <a href="#faq" className={`${isDark ? 'text-slate-300 hover:text-white' : 'text-slate-600 hover:text-slate-950'} transition`}>FAQ</a>
-          </nav>
-
-          {/* Right Action Buttons */}
-          <div className="flex items-center gap-3">
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className={`p-2.5 rounded-xl border transition-all cursor-pointer ${
-                isDark 
-                  ? 'bg-slate-900/80 border-slate-700/70 text-amber-400 hover:bg-slate-800' 
-                  : 'bg-slate-100 border-slate-300 text-slate-700 hover:bg-slate-200'
-              }`}
-              title={isDark ? 'Ubah ke mode terang' : 'Ubah ke mode gelap'}
-              aria-label="Ganti tema"
-            >
-              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </button>
-
-            {/* Exact Toba-Quest Style Start/Login Button */}
-            <button
-              onClick={() => { setAuthTab('login'); setShowAuthModal(true); }}
-              className="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-600 text-slate-950 font-extrabold text-sm hover:scale-105 transition-transform shadow-lg shadow-cyan-500/30 flex items-center gap-2 cursor-pointer"
-            >
-              <Rocket className="w-4 h-4 text-slate-950" />
-              <span>Masuk</span>
-            </button>
-          </div>
-
-        </div>
-      </header>
-
-
-      {/* ========================================================= */}
-      {/* 2. HERO SECTION (TOBA-QUEST SPACIOUS LAYOUT)              */}
-      {/* ========================================================= */}
-      <section id="hero" className="relative pt-8 pb-16 md:pt-14 md:pb-24 overflow-hidden">
+      <section id="hero" className="relative pt-6 pb-16 md:pt-10 md:pb-24 overflow-hidden">
         {/* Background glow effects */}
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
         <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
             
             {/* Left Column: Hero Texts & Toba-Quest CTA Buttons */}
-            <div className="lg:col-span-7 flex flex-col items-start text-left">
+            <div className="lg:col-span-5 flex flex-col items-start text-left">
               
               {/* Pill Chip (Toba-Quest Style) */}
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-800/80 border border-white/10 text-xs sm:text-sm font-semibold text-slate-200 mb-6 backdrop-blur-md shadow-sm">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-800/80 border border-white/10 text-xs sm:text-sm font-semibold text-slate-200 mb-6 backdrop-blur-md shadow-xs">
                 <Sparkles className="w-4 h-4 text-amber-400" />
                 <span>Ekosistem Digital • UPA Kewirausahaan UNCEN Papua</span>
               </div>
@@ -320,7 +262,7 @@ export const LandingPage = ({ setActiveTab }) => {
                   className={`w-full sm:w-auto px-7 py-4 rounded-2xl font-bold text-base sm:text-lg border transition-all flex items-center justify-center gap-2 cursor-pointer select-none text-center ${
                     isDark 
                       ? 'bg-slate-800/70 hover:bg-slate-700/80 text-white border-white/20 hover:border-white/40' 
-                      : 'bg-white hover:bg-slate-100 text-slate-900 border-slate-300 hover:border-slate-400 shadow-sm'
+                      : 'bg-white hover:bg-slate-100 text-slate-900 border-slate-300 hover:border-slate-400 shadow-xs'
                   }`}
                 >
                   <span>PELAJARI CARA KERJA</span>
@@ -338,7 +280,11 @@ export const LandingPage = ({ setActiveTab }) => {
                   {DUMMY_ACCOUNTS.map((acc) => (
                     <button
                       key={acc.role}
-                      onClick={() => loginAsDummy(acc.role)}
+                      onClick={() => {
+                        loginAsDummy(acc.key);
+                        const targetTab = acc.key === 'student' ? 'student_dashboard' : acc.key === 'reviewer' ? 'reviewer_dashboard' : `${acc.key}_dashboard`;
+                        setActiveTab(targetTab);
+                      }}
                       className={`px-3 py-1.5 rounded-xl border text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                         isDark 
                           ? 'bg-slate-900/90 border-slate-700/80 text-slate-200 hover:border-cyan-400 hover:text-cyan-300 hover:scale-105' 
@@ -354,31 +300,32 @@ export const LandingPage = ({ setActiveTab }) => {
 
             </div>
 
-            {/* Right Column: Visual Stage with Flanking 3D Mascots & Animated Slides */}
-            <div className="lg:col-span-5 relative flex items-center justify-center">
+            {/* Right Column: ENLARGED SLIDE & PERFECTLY SYMMETRICAL FLANKING MASCOTS */}
+            <div className="lg:col-span-7 relative flex items-center justify-center pt-2 sm:pt-4">
               
-              {/* Flanking Mascots & Slide Container */}
+              {/* Flanking Mascots & Slide Symmetrical Stage (Both Mascots Grounded Symmetrically With Slide) */}
               <div className="relative w-full flex items-end justify-center">
                 
-                {/* LEFT MASCOT: Mahasiswa Preneur (Slow motion float) */}
-                <div className="flex flex-col items-center z-20 shrink-0 select-none -mr-3 sm:-mr-5 mb-2">
-                  <div className="mb-1 px-2 sm:px-2.5 py-0.5 rounded-full bg-emerald-500 text-slate-950 font-bold text-[8px] sm:text-[9px] tracking-wide shadow-md border border-emerald-300 flex items-center gap-1 animate-mascot-left">
+                {/* LEFT MASCOT: Mahasiswa Preneur (Symmetrical Position & Scale) */}
+                <div className="flex flex-col items-center justify-end z-20 shrink-0 select-none -mr-6 sm:-mr-8 md:-mr-12 lg:-mr-14 xl:-mr-16 animate-mascot-left">
+                  {/* Symmetrical Top Badge */}
+                  <div className="mb-2 px-3 py-1 rounded-full bg-emerald-500 text-slate-950 font-black text-[10px] sm:text-xs tracking-wide shadow-lg border border-emerald-300 flex items-center gap-1.5 whitespace-nowrap">
                     <span>✌️</span>
                     <span>Mahasiswa Preneur</span>
                   </div>
-                  <div className="relative">
+                  <div className="relative flex flex-col items-center">
                     <img
                       src="/maskot_mahasiswa_3d.png"
                       alt="Maskot Mahasiswa Preneur Papua"
-                      className="h-40 sm:h-52 md:h-56 lg:h-64 w-auto object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.55)] animate-mascot-left pointer-events-none"
+                      className="h-52 sm:h-60 md:h-70 lg:h-80 xl:h-88 w-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.65)] pointer-events-none"
                     />
-                    <div className="w-16 sm:w-24 h-2.5 bg-black/45 rounded-full blur-sm mx-auto -mt-1 animate-mascot-shadow-left" />
+                    <div className="w-20 sm:w-28 h-2.5 bg-black/50 rounded-full blur-sm mx-auto -mt-1 animate-mascot-shadow-left" />
                   </div>
                 </div>
 
-                {/* CENTER: 3D Slide Carousel */}
-                <div className="flex-1 max-w-[280px] sm:max-w-[340px] md:max-w-[370px] z-10">
-                  <div className="relative aspect-square max-h-[260px] sm:max-h-[300px] overflow-hidden rounded-3xl border border-white/15 shadow-2xl bg-slate-900/90 group">
+                {/* CENTER: ENLARGED 3D Slide Carousel (Larger, High-Res, Cinematic Frame) */}
+                <div className="flex-1 w-full max-w-[360px] sm:max-w-[440px] md:max-w-[500px] lg:max-w-[560px] xl:max-w-[620px] z-10">
+                  <div className="relative aspect-[16/11] max-h-[350px] sm:max-h-[400px] md:max-h-[440px] lg:max-h-[480px] overflow-hidden rounded-[28px] sm:rounded-[36px] border border-white/20 shadow-2xl bg-slate-950 group">
                     {heroSlides.map((slide, idx) => {
                       const isActive = idx === currentSlide;
                       return (
@@ -386,7 +333,7 @@ export const LandingPage = ({ setActiveTab }) => {
                           key={slide.id}
                           className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out ${
                             isActive ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none z-0'
-                          } ${slide.isMap ? 'bg-gradient-to-b from-[#071f33] to-[#041320] flex items-center justify-center p-3' : ''}`}
+                          } ${slide.isMap ? 'bg-gradient-to-b from-[#071f33] to-[#041320] flex items-center justify-center p-3 sm:p-4' : ''}`}
                         >
                           <img
                             src={slide.src}
@@ -394,14 +341,15 @@ export const LandingPage = ({ setActiveTab }) => {
                             className={slide.isMap ? 'w-full h-full object-contain drop-shadow-xl' : 'w-full h-full object-cover'}
                             loading={idx === 0 ? 'eager' : 'lazy'}
                           />
-                          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/95 via-slate-950/60 to-transparent p-4 pt-8 flex flex-col justify-end">
+                          {/* Rich Gradient Scrim & Caption (with generous bottom padding so text never overlaps dots) */}
+                          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/95 via-slate-950/60 to-transparent p-4 sm:p-5 pt-12 pb-10 flex flex-col justify-end">
                             <div className="flex items-center justify-between mb-1">
-                              <span className={`text-[9.5px] font-mono font-extrabold uppercase px-2 py-0.5 rounded border ${slide.badgeColor}`}>
+                              <span className={`text-[10px] sm:text-[11px] font-mono font-extrabold uppercase px-2.5 py-0.5 rounded-md border ${slide.badgeColor}`}>
                                 {slide.badge}
                               </span>
-                              <span className="text-[10px] font-mono text-cyan-300 font-bold">{slide.tag}</span>
+                              <span className="text-[10.5px] sm:text-xs font-mono text-cyan-300 font-bold">{slide.tag}</span>
                             </div>
-                            <h4 className="text-white font-bold text-xs sm:text-sm line-clamp-1 drop-shadow">{slide.title}</h4>
+                            <h4 className="text-white font-black text-sm sm:text-base md:text-lg line-clamp-1 drop-shadow-md">{slide.title}</h4>
                           </div>
                         </div>
                       );
@@ -410,27 +358,27 @@ export const LandingPage = ({ setActiveTab }) => {
                     {/* Carousel Nav Arrows */}
                     <button
                       onClick={handlePrevSlide}
-                      className="absolute left-2 top-1/2 -translate-y-1/2 z-20 p-1.5 rounded-full bg-slate-950/70 text-white/80 hover:text-white hover:bg-slate-900 border border-white/10 opacity-0 group-hover:opacity-100 transition duration-200 cursor-pointer"
+                      className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-slate-950/80 text-white/90 hover:text-white hover:bg-slate-900 border border-white/20 opacity-0 group-hover:opacity-100 transition-all cursor-pointer shadow-lg"
                       title="Slide sebelumnya"
                     >
-                      <ChevronLeft className="w-4 h-4" />
+                      <ChevronLeft className="w-5 h-5" />
                     </button>
                     <button
                       onClick={handleNextSlide}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 z-20 p-1.5 rounded-full bg-slate-950/70 text-white/80 hover:text-white hover:bg-slate-900 border border-white/10 opacity-0 group-hover:opacity-100 transition duration-200 cursor-pointer"
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-slate-950/80 text-white/90 hover:text-white hover:bg-slate-900 border border-white/20 opacity-0 group-hover:opacity-100 transition-all cursor-pointer shadow-lg"
                       title="Slide berikutnya"
                     >
-                      <ChevronRight className="w-4 h-4" />
+                      <ChevronRight className="w-5 h-5" />
                     </button>
 
                     {/* Dot Indicators */}
-                    <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-20 px-2.5 py-1 rounded-full bg-slate-950/60 backdrop-blur-xs border border-white/10">
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20 px-3 py-1 rounded-full bg-slate-950/75 backdrop-blur-md border border-white/15">
                       {heroSlides.map((_, dotIdx) => (
                         <button
                           key={dotIdx}
                           onClick={() => setCurrentSlide(dotIdx)}
-                          className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                            dotIdx === currentSlide ? 'w-5 bg-cyan-400' : 'w-1.5 bg-white/40 hover:bg-white/70'
+                          className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                            dotIdx === currentSlide ? 'w-6 bg-cyan-400' : 'w-2 bg-white/40 hover:bg-white/70'
                           }`}
                         />
                       ))}
@@ -438,19 +386,20 @@ export const LandingPage = ({ setActiveTab }) => {
                   </div>
                 </div>
 
-                {/* RIGHT MASCOT: Mentor & Pembimbing (Slow motion float) */}
-                <div className="flex flex-col items-center z-20 shrink-0 select-none -ml-3 sm:-ml-5 mb-2">
-                  <div className="mb-1 px-2 sm:px-2.5 py-0.5 rounded-full bg-amber-500 text-slate-950 font-bold text-[8px] sm:text-[9px] tracking-wide shadow-md border border-amber-300 flex items-center gap-1 animate-mascot-right">
+                {/* RIGHT MASCOT: Mentor & Pembimbing (Symmetrical Position & Scale) */}
+                <div className="flex flex-col items-center justify-end z-20 shrink-0 select-none -ml-6 sm:-ml-8 md:-ml-12 lg:-ml-14 xl:-ml-16 animate-mascot-right">
+                  {/* Symmetrical Top Badge */}
+                  <div className="mb-2 px-3 py-1 rounded-full bg-amber-500 text-slate-950 font-black text-[10px] sm:text-xs tracking-wide shadow-lg border border-amber-300 flex items-center gap-1.5 whitespace-nowrap">
                     <span>⭐</span>
                     <span>Mentor & Inkubasi</span>
                   </div>
-                  <div className="relative">
+                  <div className="relative flex flex-col items-center">
                     <img
                       src="/maskot_mentor_3d.png"
                       alt="Maskot Pendamping & Mentor"
-                      className="h-40 sm:h-52 md:h-56 lg:h-64 w-auto object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.55)] animate-mascot-right pointer-events-none"
+                      className="h-52 sm:h-60 md:h-70 lg:h-80 xl:h-88 w-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.65)] pointer-events-none"
                     />
-                    <div className="w-14 sm:w-20 h-2.5 bg-black/45 rounded-full blur-sm mx-auto -mt-1 animate-mascot-shadow-right" />
+                    <div className="w-20 sm:w-28 h-2.5 bg-black/50 rounded-full blur-sm mx-auto -mt-1 animate-mascot-shadow-right" />
                   </div>
                 </div>
 
@@ -464,7 +413,7 @@ export const LandingPage = ({ setActiveTab }) => {
 
 
       {/* ========================================================= */}
-      {/* 3. THREE CORE PILLARS (TOBA-QUEST: EXPLORE, COMMUNICATE, SHARE) */}
+      {/* 2. THREE CORE PILLARS (TOBA-QUEST: EXPLORE, COMMUNICATE, SHARE) */}
       {/* ========================================================= */}
       <section id="pillars" className={`py-14 border-t transition-colors duration-300 ${
         isDark ? 'bg-[#081222] border-slate-800/80' : 'bg-white border-slate-200'
@@ -529,7 +478,7 @@ export const LandingPage = ({ setActiveTab }) => {
 
 
       {/* ========================================================= */}
-      {/* 4. WHY MENOKEN BANNER (TOBA-QUEST: WHY SECTION)           */}
+      {/* 3. WHY MENOKEN BANNER (TOBA-QUEST: WHY SECTION)           */}
       {/* ========================================================= */}
       <section id="why" className="py-16 md:py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -557,7 +506,7 @@ export const LandingPage = ({ setActiveTab }) => {
 
 
       {/* ========================================================= */}
-      {/* 5. HOW IT WORKS (TOBA-QUEST: 4 STEPPER CARDS)             */}
+      {/* 4. HOW IT WORKS (TOBA-QUEST: 4 STEPPER CARDS)             */}
       {/* ========================================================= */}
       <section id="how-it-works" className={`py-16 md:py-20 border-t transition-colors duration-300 ${
         isDark ? 'bg-[#081222] border-slate-800/80' : 'bg-white border-slate-200'
@@ -633,7 +582,7 @@ export const LandingPage = ({ setActiveTab }) => {
 
 
       {/* ========================================================= */}
-      {/* 6. COMMODITIES & SECTORS (TOBA-QUEST: MORE WORLDS ARE COMING) */}
+      {/* 5. COMMODITIES & SECTORS (TOBA-QUEST: MORE WORLDS ARE COMING) */}
       {/* ========================================================= */}
       <section id="commodities" className="py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -712,7 +661,7 @@ export const LandingPage = ({ setActiveTab }) => {
 
 
       {/* ========================================================= */}
-      {/* 7. FAQ SECTION                                            */}
+      {/* 6. FAQ SECTION                                            */}
       {/* ========================================================= */}
       <section id="faq" className={`py-16 border-t transition-colors duration-300 ${
         isDark ? 'bg-[#081222] border-slate-800/80' : 'bg-white border-slate-200'
@@ -763,7 +712,7 @@ export const LandingPage = ({ setActiveTab }) => {
 
 
       {/* ========================================================= */}
-      {/* 8. SINGLE-LINE OFFICIAL FOOTER                            */}
+      {/* 7. SINGLE-LINE OFFICIAL FOOTER                            */}
       {/* ========================================================= */}
       <footer className={`border-t py-5 px-4 sm:px-6 lg:px-8 transition-colors duration-300 ${
         isDark ? 'bg-[#050b14] border-slate-800/80 text-slate-400' : 'bg-white border-slate-200 text-slate-600'
@@ -803,7 +752,7 @@ export const LandingPage = ({ setActiveTab }) => {
 
 
       {/* ========================================================= */}
-      {/* 9. FLOATING SCROLL TO TOP BUTTON                          */}
+      {/* 8. FLOATING SCROLL TO TOP BUTTON                          */}
       {/* ========================================================= */}
       <button
         onClick={scrollToTop}
@@ -821,7 +770,7 @@ export const LandingPage = ({ setActiveTab }) => {
 
 
       {/* ========================================================= */}
-      {/* 10. AUTH MODAL (LOGIN & REGISTRATION)                     */}
+      {/* 9. AUTH MODAL (LOGIN & REGISTRATION)                      */}
       {/* ========================================================= */}
       {showAuthModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
@@ -883,7 +832,12 @@ export const LandingPage = ({ setActiveTab }) => {
                     {DUMMY_ACCOUNTS.map((acc) => (
                       <button
                         key={acc.role}
-                        onClick={() => { loginAsDummy(acc.role); setShowAuthModal(false); }}
+                        onClick={() => {
+                          loginAsDummy(acc.key);
+                          setShowAuthModal(false);
+                          const targetTab = acc.key === 'student' ? 'student_dashboard' : acc.key === 'reviewer' ? 'reviewer_dashboard' : `${acc.key}_dashboard`;
+                          setActiveTab(targetTab);
+                        }}
                         className={`p-2 rounded-xl border text-xs font-bold transition text-center cursor-pointer ${
                           isDark 
                             ? 'bg-slate-900 border-slate-800 hover:border-cyan-400 hover:text-cyan-300 text-slate-300' 
