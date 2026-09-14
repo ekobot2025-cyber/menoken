@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth, DUMMY_ACCOUNTS } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
+import { useCart } from '../context/CartContext';
 import { exportDataJSON, importDataJSON, resetToDefaultSeed } from '../lib/storage';
 import {
   Rocket,
@@ -21,7 +22,9 @@ import {
   Layers,
   HelpCircle,
   TrendingUp,
-  MapPin
+  MapPin,
+  ShoppingCart,
+  Search
 } from 'lucide-react';
 
 export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }) => {
@@ -34,6 +37,26 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
     logout,
     availableRoles
   } = useAuth();
+  const { cartCount, setIsCartOpen } = useCart();
+  const [navbarSearch, setNavbarSearch] = useState(() => {
+    return localStorage.getItem('menoken_search_query') || '';
+  });
+
+  const handleNavbarSearchSubmit = (e) => {
+    if (e) e.preventDefault();
+    if (!navbarSearch.trim()) return;
+    localStorage.setItem('menoken_search_query', navbarSearch.trim());
+    window.dispatchEvent(new CustomEvent('menoken-search-update', { detail: navbarSearch.trim() }));
+    if (activeTab !== 'market') {
+      setActiveTab('market');
+    }
+    setTimeout(() => {
+      const el = document.getElementById('katalog-produk');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 120);
+  };
 
   const [roleMenuOpen, setRoleMenuOpen] = useState(false);
   const [dbModalOpen, setDbModalOpen] = useState(false);
@@ -164,8 +187,46 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
           </div>
         </div>
 
-        {/* Center: Main Universal Website Navigation Links (Visible across ALL pages!) */}
-        <nav className="hidden lg:flex items-center gap-4 xl:gap-7 text-xs xl:text-[13px] font-extrabold tracking-wide uppercase">
+        {/* Center-Left: Prominent Agro-Commerce Search Bar */}
+        <div className="flex-1 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-2 sm:mx-4 hidden sm:block">
+          <form onSubmit={handleNavbarSearchSubmit} className="relative w-full">
+            <input
+              type="text"
+              value={navbarSearch}
+              onChange={(e) => setNavbarSearch(e.target.value)}
+              placeholder="Cari produk, komoditas, atau UMKM..."
+              className={`w-full pl-9 pr-14 py-2 sm:py-2.5 rounded-full text-xs font-semibold border transition-all outline-hidden focus:ring-2 focus:ring-emerald-500/30 ${
+                isDark
+                  ? 'bg-slate-900/90 border-slate-700 text-white placeholder-slate-400 focus:border-emerald-500'
+                  : 'bg-slate-100/90 border-slate-300 text-slate-900 placeholder-slate-500 focus:border-emerald-600 focus:bg-white'
+              }`}
+            />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            {navbarSearch && (
+              <button
+                type="button"
+                onClick={() => {
+                  setNavbarSearch('');
+                  localStorage.removeItem('menoken_search_query');
+                  window.dispatchEvent(new CustomEvent('menoken-search-update', { detail: '' }));
+                }}
+                className="absolute right-12 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 cursor-pointer p-0.5"
+                title="Hapus pencarian"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+            <button
+              type="submit"
+              className="absolute right-1.5 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-black transition cursor-pointer shadow-xs"
+            >
+              Cari
+            </button>
+          </form>
+        </div>
+
+        {/* Center: Main Universal Website Navigation Links */}
+        <nav className="hidden xl:flex items-center gap-4 text-xs font-extrabold tracking-wide uppercase">
           {navLinks.map((link) => {
             const isLinkActive = isLanding && link.id === 'hero';
             return (
@@ -202,6 +263,32 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
             <Compass className="w-4 h-4" />
             <span className="hidden xs:inline">Menu</span>
             <ChevronDown className={`w-3.5 h-3.5 transition-transform ${mobileNavOpen ? 'rotate-180' : ''}`} />
+          </button>
+
+                    {/* Shopping Cart Button (Agro-Commerce 35 Feature) */}
+          <button
+            onClick={() => setIsCartOpen(true)}
+            className={`relative flex items-center gap-1.5 px-3 py-1.5 sm:px-3 sm:py-2 rounded-xl border font-bold text-xs transition cursor-pointer group ${
+              isDark
+                ? 'bg-slate-900/90 border-slate-700/80 text-emerald-400 hover:border-emerald-500/60 hover:bg-slate-800'
+                : 'bg-emerald-50 border-emerald-200 text-emerald-800 hover:bg-emerald-100 shadow-xs'
+            }`}
+            title="Buka Keranjang Belanja MENOKEN"
+          >
+            <div className="relative">
+              <ShoppingCart className="w-4 h-4 group-hover:scale-110 transition-transform text-emerald-500" />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 px-1 min-w-[16px] h-4 rounded-full bg-amber-500 text-slate-950 text-[10px] font-black flex items-center justify-center shadow-md animate-pulse">
+                  {cartCount}
+                </span>
+              )}
+            </div>
+            <span className="hidden sm:inline">Keranjang</span>
+            {cartCount > 0 && (
+              <span className="hidden sm:inline-block px-1.5 py-0.2 rounded-md bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[10px] font-mono font-black">
+                {cartCount}
+              </span>
+            )}
           </button>
 
           {/* Quick Market Link */}
@@ -367,6 +454,51 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
         <div className={`lg:hidden border-t px-4 py-3 space-y-1 backdrop-blur-xl ${
           isDark ? 'bg-[#060c18]/98 border-slate-800 text-slate-200' : 'bg-white/98 border-slate-200 text-slate-800'
         }`}>
+          {/* Mobile Search Bar */}
+          <form
+            onSubmit={(e) => {
+              handleNavbarSearchSubmit(e);
+              setMobileNavOpen(false);
+            }}
+            className="pb-2 pt-1"
+          >
+            <div className="relative">
+              <input
+                type="text"
+                value={navbarSearch}
+                onChange={(e) => setNavbarSearch(e.target.value)}
+                placeholder="Cari produk wirausaha..."
+                className={`w-full pl-9 pr-14 py-2 rounded-xl text-xs font-semibold border ${
+                  isDark ? 'bg-slate-900 border-slate-700 text-white' : 'bg-slate-100 border-slate-200 text-slate-900'
+                }`}
+              />
+              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              <button
+                type="submit"
+                className="absolute right-1 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-lg bg-emerald-600 text-white text-[11px] font-bold"
+              >
+                Cari
+              </button>
+            </div>
+          </form>
+
+          {/* Mobile Cart Quick Trigger */}
+          <button
+            onClick={() => {
+              setIsCartOpen(true);
+              setMobileNavOpen(false);
+            }}
+            className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-500 font-bold text-xs"
+          >
+            <div className="flex items-center gap-2">
+              <ShoppingCart className="w-4 h-4" />
+              <span>Keranjang Belanja</span>
+            </div>
+            <span className="px-2 py-0.5 rounded-full bg-amber-500 text-slate-950 text-[10px] font-black">
+              {cartCount} Item
+            </span>
+          </button>
+
           <div className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider px-3 py-1">
             Navigasi Platform
           </div>

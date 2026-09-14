@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { getProducts, getGroups, getMasterData } from '../lib/storage';
 import { LegalBadge } from '../components/LegalBadge';
 import { useTheme } from '../context/ThemeContext';
+import { useCart } from '../context/CartContext';
 import {
   Search,
   Filter,
@@ -29,16 +30,30 @@ import {
   Sprout,
   Shirt,
   Laptop,
-  Compass
+  Compass,
+  ShoppingCart
 } from 'lucide-react';
 
 export const MarketPublic = () => {
   const { isDark } = useTheme();
+  const { addToCart, setIsCartOpen, cartCount } = useCart();
   const allProducts = getProducts();
   const groups = getGroups();
   const masterData = getMasterData();
 
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(() => {
+    return localStorage.getItem('menoken_search_query') || '';
+  });
+
+  React.useEffect(() => {
+    const handleSearchUpdate = (e) => {
+      if (typeof e.detail === 'string') {
+        setSearchQuery(e.detail);
+      }
+    };
+    window.addEventListener('menoken-search-update', handleSearchUpdate);
+    return () => window.removeEventListener('menoken-search-update', handleSearchUpdate);
+  }, []);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedFaculty, setSelectedFaculty] = useState('all');
   const [selectedLegality, setSelectedLegality] = useState('all');
@@ -333,7 +348,10 @@ Mohon informasi ketersediaan stok, opsi pengiriman, dan estimasi ongkos kirim. T
               type="text"
               placeholder="Cari produk (kopi, noken, sagu, buah merah)..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                localStorage.setItem('menoken_search_query', e.target.value);
+              }}
               className={`w-full pl-10 pr-4 py-2.5 rounded-2xl text-xs font-semibold focus:outline-none focus:border-emerald-500 transition border ${
                 isDark 
                   ? 'bg-slate-950 border-slate-800 text-white placeholder:text-slate-500' 
@@ -553,17 +571,29 @@ Mohon informasi ketersediaan stok, opsi pengiriman, dan estimasi ongkos kirim. T
                     </div>
                   </div>
 
-                  {/* Action Buttons: Agrodyke Dual Action (Pesan WA + B2B RFQ) */}
-                  <div className="pt-2 grid grid-cols-2 gap-2.5">
-                    
-                    {/* Primary Button: WhatsApp Direct Order */}
-                    <button
-                      onClick={() => handleWhatsAppOrder(product)}
-                      className="py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs flex items-center justify-center gap-1.5 transition shadow-md shadow-emerald-950/20 cursor-pointer"
-                    >
-                      <MessageCircle className="w-4 h-4" />
-                      <span>Pesan WA</span>
-                    </button>
+                  {/* Action Buttons: + Keranjang, Pesan WA & Detail B2B */}
+                  <div className="pt-2 space-y-2">
+                    <div className="grid grid-cols-2 gap-2">
+                      {/* Add to Cart Button */}
+                      <button
+                        onClick={() => addToCart(product)}
+                        className="py-2.5 px-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs flex items-center justify-center gap-1.5 transition shadow-sm hover:scale-[1.02] cursor-pointer"
+                        title="Tambah ke Keranjang Belanja"
+                      >
+                        <ShoppingCart className="w-4 h-4" />
+                        <span>+ Keranjang</span>
+                      </button>
+
+                      {/* WhatsApp Direct Order */}
+                      <button
+                        onClick={() => handleWhatsAppOrder(product)}
+                        className="py-2.5 px-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs flex items-center justify-center gap-1.5 transition shadow-md shadow-emerald-950/20 cursor-pointer"
+                        title="Order Cepat ke WhatsApp"
+                      >
+                        <MessageCircle className="w-4 h-4" />
+                        <span>Pesan WA</span>
+                      </button>
+                    </div>
 
                     {/* Secondary Button: RFQ B2B */}
                     <button
@@ -571,16 +601,15 @@ Mohon informasi ketersediaan stok, opsi pengiriman, dan estimasi ongkos kirim. T
                         setRfqProduct(product);
                         setRfqModalOpen(true);
                       }}
-                      className={`py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition border cursor-pointer ${
+                      className={`w-full py-2 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition border cursor-pointer ${
                         isDark
                           ? 'bg-slate-800/80 border-slate-700 text-slate-200 hover:bg-slate-700'
                           : 'bg-slate-50 border-slate-200 text-slate-800 hover:bg-slate-100'
                       }`}
                     >
-                      <FileSpreadsheet className="w-4 h-4 text-emerald-500" />
-                      <span>Detail & B2B</span>
+                      <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-500" />
+                      <span>Detail Spek & Penawaran B2B</span>
                     </button>
-
                   </div>
 
                 </div>
@@ -645,6 +674,19 @@ Mohon informasi ketersediaan stok, opsi pengiriman, dan estimasi ongkos kirim. T
         </div>
       </section>
 
+
+      {/* Floating Cart Indicator */}
+      {cartCount > 0 && (
+        <div className="fixed bottom-6 left-6 z-40">
+          <button
+            onClick={() => setIsCartOpen(true)}
+            className="group relative flex items-center gap-2.5 px-4 py-3 rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs shadow-2xl hover:scale-105 transition-all cursor-pointer border-2 border-white/40"
+          >
+            <ShoppingCart className="w-5 h-5 text-slate-950" />
+            <span>{cartCount} Produk di Keranjang</span>
+          </button>
+        </div>
+      )}
 
       {/* ========================================================= */}
       {/* 6. FLOATING WHATSAPP ASSISTANCE BUTTON (AGRODYKE CHAT)   */}
@@ -734,13 +776,22 @@ Mohon informasi ketersediaan stok, opsi pengiriman, dan estimasi ongkos kirim. T
                 </div>
 
                 <div className="space-y-2 pt-4 border-t border-slate-800">
-                  <button
-                    onClick={() => handleWhatsAppOrder(activeModalProduct)}
-                    className="w-full py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg transition cursor-pointer"
-                  >
-                    <MessageCircle className="w-4 h-4" />
-                    <span>Pesan Langsung via WhatsApp</span>
-                  </button>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      onClick={() => addToCart(activeModalProduct)}
+                      className="py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs flex items-center justify-center gap-2 shadow-lg transition cursor-pointer"
+                    >
+                      <ShoppingCart className="w-4 h-4" />
+                      <span>+ Keranjang</span>
+                    </button>
+                    <button
+                      onClick={() => handleWhatsAppOrder(activeModalProduct)}
+                      className="py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg transition cursor-pointer"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      <span>Pesan WA</span>
+                    </button>
+                  </div>
 
                   <button
                     onClick={() => {

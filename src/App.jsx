@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { Layout } from './components/Layout';
+import { CartProvider } from './context/CartContext';
+import { CartDrawer } from './components/CartDrawer';
 
 // Public Pages
 import { LandingPage } from './pages/LandingPage';
@@ -117,9 +119,12 @@ const AppContent = () => {
   };
 
   return (
-    <Layout activeTab={activeTab} setActiveTab={handleSetActiveTab}>
-      {renderActiveView()}
-    </Layout>
+    <>
+      <Layout activeTab={activeTab} setActiveTab={handleSetActiveTab}>
+        {renderActiveView()}
+      </Layout>
+      <CartDrawer setActiveTab={handleSetActiveTab} />
+    </>
   );
 };
 
@@ -127,7 +132,9 @@ export default function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <AppContent />
+        <CartProvider>
+          <AppContent />
+        </CartProvider>
       </AuthProvider>
     </ThemeProvider>
   );
