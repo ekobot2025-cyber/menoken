@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth, DUMMY_ACCOUNTS } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
+import { SakralEcoBackground } from '../components/SakralEcoBackground';
 import { getGroups, getProducts, getMasterData } from '../lib/storage';
 import {
   Rocket,
@@ -203,9 +204,11 @@ export const LandingPage = ({ setActiveTab }) => {
   ];
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 font-sans ${
-      isDark ? 'bg-[#060c18] text-slate-100' : 'bg-slate-50 text-slate-900'
+    <div className={`relative min-h-screen transition-colors duration-300 font-sans ${
+      isDark ? 'bg-[#02180e] text-slate-100' : 'bg-slate-50 text-slate-900'
     }`}>
+      {/* Living Ecological Particle Animation Ala SAKRAL FEB UNCEN (Dark Mode Only) */}
+      {isDark && <SakralEcoBackground />}
 
       {/* ========================================================= */}
       {/* 1. HERO SECTION (TOBA-QUEST SPACIOUS + ENLARGED SLIDE)    */}
@@ -416,7 +419,7 @@ export const LandingPage = ({ setActiveTab }) => {
       {/* 2. THREE CORE PILLARS (TOBA-QUEST: EXPLORE, COMMUNICATE, SHARE) */}
       {/* ========================================================= */}
       <section id="pillars" className={`py-14 border-t transition-colors duration-300 ${
-        isDark ? 'bg-[#081222] border-slate-800/80' : 'bg-white border-slate-200'
+        isDark ? 'bg-[#02180e]/75 backdrop-blur-xs border-emerald-900/30' : 'bg-white border-slate-200'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -484,7 +487,7 @@ export const LandingPage = ({ setActiveTab }) => {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className={`p-8 sm:p-12 rounded-3xl border relative overflow-hidden text-center ${
             isDark 
-              ? 'bg-gradient-to-b from-slate-900/90 to-slate-950 border-slate-800 shadow-2xl' 
+              ? 'bg-gradient-to-b from-[#032817]/85 to-[#02180e]/90 border-emerald-800/40 shadow-2xl backdrop-blur-xs' 
               : 'bg-gradient-to-b from-emerald-50 to-teal-50/70 border-emerald-200/80 shadow-xl'
           }`}>
             <div className="inline-block px-3.5 py-1 rounded-full bg-amber-400/20 text-amber-400 border border-amber-400/30 text-xs font-black tracking-widest uppercase mb-4">
@@ -509,7 +512,7 @@ export const LandingPage = ({ setActiveTab }) => {
       {/* 4. HOW IT WORKS (TOBA-QUEST: 4 STEPPER CARDS)             */}
       {/* ========================================================= */}
       <section id="how-it-works" className={`py-16 md:py-20 border-t transition-colors duration-300 ${
-        isDark ? 'bg-[#081222] border-slate-800/80' : 'bg-white border-slate-200'
+        isDark ? 'bg-[#02180e]/75 backdrop-blur-xs border-emerald-900/30' : 'bg-white border-slate-200'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
@@ -664,7 +667,7 @@ export const LandingPage = ({ setActiveTab }) => {
       {/* 6. FAQ SECTION                                            */}
       {/* ========================================================= */}
       <section id="faq" className={`py-16 border-t transition-colors duration-300 ${
-        isDark ? 'bg-[#081222] border-slate-800/80' : 'bg-white border-slate-200'
+        isDark ? 'bg-[#02180e]/75 backdrop-blur-xs border-emerald-900/30' : 'bg-white border-slate-200'
       }`}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           
@@ -715,7 +718,7 @@ export const LandingPage = ({ setActiveTab }) => {
       {/* 7. SINGLE-LINE OFFICIAL FOOTER                            */}
       {/* ========================================================= */}
       <footer className={`border-t py-5 px-4 sm:px-6 lg:px-8 transition-colors duration-300 ${
-        isDark ? 'bg-[#050b14] border-slate-800/80 text-slate-400' : 'bg-white border-slate-200 text-slate-600'
+        isDark ? 'bg-[#02180e]/95 border-emerald-900/40 text-slate-400' : 'bg-white border-slate-200 text-slate-600'
       }`}>
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-2.5 text-[10.5px] sm:text-[11px] lg:text-[11.5px]">
           <div className="flex items-center gap-2 whitespace-nowrap text-center lg:text-left">

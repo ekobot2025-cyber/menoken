@@ -172,8 +172,8 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
             onClick={() => handleNavClick('hero')}
             className="flex items-center gap-2.5 sm:gap-3 cursor-pointer select-none group"
           >
-            <div className="relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 border border-emerald-500/30 shadow-md group-hover:scale-105 transition-transform">
-              <img src="/noken_pixar_3d.png" alt="MENOKEN" className="w-6 h-6 sm:w-7 sm:h-7 object-contain drop-shadow" />
+            <div className="relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-emerald-500/15 to-cyan-500/15 border border-emerald-500/25 shadow-md group-hover:scale-105 transition-transform">
+              <img src="/noken_pixar_3d.png" alt="MENOKEN" className="w-7 h-7 sm:w-8 sm:h-8 object-contain drop-shadow-md hover:brightness-110 transition-all" />
             </div>
             <div>
               <div className="flex items-center gap-1.5">
