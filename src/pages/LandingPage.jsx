@@ -1471,15 +1471,25 @@ export const LandingPage = ({ setActiveTab }) => {
       <footer className={`border-t py-8 px-4 sm:px-6 lg:px-8 transition-colors duration-300 ${
         isDark ? 'bg-[#050b14] border-slate-800/80 text-slate-400' : 'bg-white border-slate-200 text-slate-600'
       }`}>
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm">
-          <div className="flex items-center gap-2">
-            <img src="/noken_pixar_3d.png" alt="MENOKEN" className="w-5 h-5 object-contain" />
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs sm:text-sm">
+          <div className="flex items-center gap-2 text-center md:text-left">
+            <img src="/noken_pixar_3d.png" alt="MENOKEN" className="w-5 h-5 object-contain shrink-0" />
             <span className={`font-semibold ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
-              © 2026 MENOKEN • UPA Uncen Platform. All rights reserved.
+              © 2026 MENOKEN • Manajemen Ekosistem & Networking Kewirausahaan • UPA Uncen Platform. All rights reserved.
             </span>
           </div>
-          <div className="flex items-center gap-1.5 text-xs sm:text-sm">
-            <span>Made With ❤️ by</span>
+          <div className="flex flex-wrap items-center justify-center md:justify-end gap-1.5 text-xs sm:text-sm text-center">
+            <span>by</span>
+            <a
+              href="https://www.instagram.com/kurniawan_patma"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-amber-500 hover:text-amber-400 underline underline-offset-4 transition"
+            >
+              Kurnia Patma
+            </a>
+            <span className="opacity-50">|</span>
+            <span>UI/UX by</span>
             <a
               href="https://www.linkedin.com/in/papedatimur"
               target="_blank"
@@ -1488,6 +1498,8 @@ export const LandingPage = ({ setActiveTab }) => {
             >
               Enterdie
             </a>
+            <span className="opacity-50">•</span>
+            <span className="text-[11px] sm:text-xs opacity-80">Hak Cipta Dilindungi Undang-Undang</span>
           </div>
         </div>
       </footer>

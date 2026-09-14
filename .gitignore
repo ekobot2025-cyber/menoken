@@ -31,3 +31,6 @@ dist-ssr
 .cache
 .parcel-cache
 .eslintcache
+
+# Word lock files
+~$*

@@ -50,15 +50,25 @@ export const Layout = ({ children, activeTab, setActiveTab }) => {
             </div>
 
             {/* Dashboard Footer */}
-            <footer className={`mt-12 pt-6 border-t text-xs flex flex-col sm:flex-row items-center justify-between gap-3 ${
+            <footer className={`mt-12 pt-6 border-t text-xs flex flex-col md:flex-row items-center justify-between gap-3 ${
               isDark ? 'border-slate-800/80 text-slate-500' : 'border-slate-200 text-slate-500'
             }`}>
-              <div className="flex items-center gap-2">
-                <img src="/noken_pixar_3d.png" alt="MENOKEN" className="w-4 h-4 object-contain opacity-80" />
-                <span>© 2026 MENOKEN • UPA Uncen Platform. All rights reserved.</span>
+              <div className="flex items-center gap-2 text-center md:text-left">
+                <img src="/noken_pixar_3d.png" alt="MENOKEN" className="w-4 h-4 object-contain opacity-80 shrink-0" />
+                <span>© 2026 MENOKEN • Manajemen Ekosistem & Networking Kewirausahaan • UPA Uncen Platform. All rights reserved.</span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <span>Made With ❤️ by</span>
+              <div className="flex flex-wrap items-center justify-center md:justify-end gap-1.5">
+                <span>by</span>
+                <a
+                  href="https://www.instagram.com/kurniawan_patma"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold text-amber-500 hover:text-amber-400 hover:underline transition"
+                >
+                  Kurnia Patma
+                </a>
+                <span className="opacity-50">|</span>
+                <span>UI/UX by</span>
                 <a
                   href="https://www.linkedin.com/in/papedatimur"
                   target="_blank"
@@ -67,6 +77,8 @@ export const Layout = ({ children, activeTab, setActiveTab }) => {
                 >
                   Enterdie
                 </a>
+                <span className="opacity-50">•</span>
+                <span className="text-[11px] opacity-80">Hak Cipta Dilindungi Undang-Undang</span>
               </div>
             </footer>
           </main>
