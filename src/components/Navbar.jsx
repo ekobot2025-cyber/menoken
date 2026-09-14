@@ -152,7 +152,7 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
       {/* ========================================================================= */}
       {/* BARIS 1: BRAND LOGO + WIDE SEARCH BAR + CART & USER ACTIONS              */}
       {/* ========================================================================= */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-18 flex items-center justify-between gap-3 sm:gap-6">
+      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 h-16 sm:h-18 flex items-center justify-between gap-4 sm:gap-6">
         
         {/* Left: Mobile Hamburger (on dashboard) + Brand Logo */}
         <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
@@ -192,7 +192,7 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
         </div>
 
         {/* Center: Prominent Agro-Commerce Style Search Bar (Wide, Clean, Generous) */}
-        <div className="flex-1 max-w-md md:max-w-xl lg:max-w-2xl mx-2 sm:mx-6 hidden sm:block">
+        <div className="flex-1 max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-3 sm:mx-6 lg:mx-8 hidden sm:block">
           <form onSubmit={handleNavbarSearchSubmit} className="relative w-full flex items-center">
             <input
               type="text"
@@ -427,7 +427,7 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
       <div className={`transition-colors duration-200 border-t ${
         isDark ? 'bg-[#031d16] border-emerald-950/80 text-white' : 'bg-[#064e3b] border-emerald-800/60 text-white shadow-xs'
       }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-10 sm:h-11 flex items-center justify-between gap-4 overflow-x-auto no-scrollbar">
+        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 h-10 sm:h-11 flex items-center justify-between gap-4 overflow-x-auto no-scrollbar">
           
           {/* Main Website Navigation Links */}
           <nav className="flex items-center gap-4 sm:gap-6 md:gap-7 text-xs sm:text-[12.5px] font-extrabold tracking-wide uppercase whitespace-nowrap">
