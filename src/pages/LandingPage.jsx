@@ -483,13 +483,26 @@ export const LandingPage = ({ setActiveTab }) => {
       {/* ========================================================= */}
       {/* 3. WHY MENOKEN BANNER (TOBA-QUEST: WHY SECTION)           */}
       {/* ========================================================= */}
-      <section id="why" className="py-16 md:py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="why" className="py-16 md:py-20 relative overflow-hidden">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className={`p-8 sm:p-12 rounded-3xl border relative overflow-hidden text-center ${
             isDark 
               ? 'bg-gradient-to-b from-[#032817]/85 to-[#02180e]/90 border-emerald-800/40 shadow-2xl backdrop-blur-xs' 
               : 'bg-gradient-to-b from-emerald-50 to-teal-50/70 border-emerald-200/80 shadow-xl'
           }`}>
+            {/* Left Accent: Abstract Modern Papuan Ethnic Motif Strip */}
+            <img
+              src="/papua_ethnic_totem_strip.png"
+              alt="Ornamen Kearifan Papua"
+              className="absolute -left-2 sm:left-2 top-1/2 -translate-y-1/2 h-44 sm:h-56 w-auto object-contain opacity-25 pointer-events-none select-none"
+            />
+
+            {/* Right Accent: Papuan Dancers Silhouette Watermark */}
+            <img
+              src="/papua_dancers_silhouette.png"
+              alt="Siluet Generasi Muda Penari Papua"
+              className="absolute -right-6 -bottom-6 sm:bottom-0 sm:right-2 h-36 sm:h-48 w-auto object-contain opacity-20 pointer-events-none select-none"
+            />
             <div className="inline-block px-3.5 py-1 rounded-full bg-amber-400/20 text-amber-400 border border-amber-400/30 text-xs font-black tracking-widest uppercase mb-4">
               MENGAPA PLATFORM MENOKEN?
             </div>

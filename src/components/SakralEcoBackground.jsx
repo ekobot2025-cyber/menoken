@@ -127,6 +127,16 @@ export const SakralEcoBackground = () => {
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      {/* 0. Panoramic Misty Papuan Rainforest Canopy (Authentic Papua Wisdom Backdrop) */}
+      <div className="absolute top-0 inset-x-0 h-[520px] sm:h-[640px] md:h-[720px] overflow-hidden opacity-25 mix-blend-screen pointer-events-none">
+        <img
+          src="/papua_misty_rainforest.png"
+          alt="Hutan Hujan Tropis Papua Berkabut"
+          className="w-full h-full object-cover object-center scale-105 filter saturate-125"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#02180e]/40 via-[#02180e]/75 to-[#02180e]" />
+      </div>
+
       {/* 1. Deep Ecological Glow Orbs (Sakral Style) */}
       <div className="absolute -top-32 -left-20 h-[36rem] w-[36rem] rounded-full bg-[#00b159]/15 blur-[160px]" />
       <div className="absolute top-1/3 -right-20 h-[34rem] w-[34rem] rounded-full bg-cyan-600/15 blur-[160px]" />

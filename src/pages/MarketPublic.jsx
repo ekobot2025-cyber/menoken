@@ -630,9 +630,15 @@ Mohon informasi ketersediaan stok, opsi pengiriman, dan estimasi ongkos kirim. T
         isDark ? 'bg-[#081524] border-slate-800' : 'bg-[#f4efe4] border-amber-200/70'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className={`p-8 sm:p-10 rounded-3xl border shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8 ${
+          <div className={`p-8 sm:p-10 rounded-3xl border shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8 relative overflow-hidden ${
             isDark ? 'bg-slate-900/95 border-slate-800' : 'bg-white border-slate-200'
           }`}>
+            {/* Papuan Youth & Culture Watermark */}
+            <img
+              src="/papua_dancers_silhouette.png"
+              alt="Kearifan Budaya Pemuda Papua"
+              className="absolute -right-6 -bottom-6 h-36 sm:h-44 w-auto object-contain opacity-10 pointer-events-none select-none"
+            />
             
             <div className="space-y-3 max-w-2xl text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 text-amber-500 border border-amber-400/30 text-xs font-black uppercase tracking-wider">
