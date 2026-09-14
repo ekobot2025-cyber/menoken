@@ -219,7 +219,7 @@ export const LandingPage = ({ setActiveTab }) => {
         <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-start">
             
             {/* Left Column: Hero Texts & Toba-Quest CTA Buttons */}
             <div className="lg:col-span-5 flex flex-col items-start text-left">
@@ -304,13 +304,13 @@ export const LandingPage = ({ setActiveTab }) => {
             </div>
 
             {/* Right Column: ENLARGED SLIDE & PERFECTLY SYMMETRICAL FLANKING MASCOTS */}
-            <div className="lg:col-span-7 relative flex items-center justify-center pt-2 sm:pt-4">
+            <div className="lg:col-span-7 relative flex items-center justify-center pt-2 lg:pt-14">
               
               {/* Flanking Mascots & Slide Symmetrical Stage (Both Mascots Grounded Symmetrically With Slide) */}
               <div className="relative w-full flex items-end justify-center">
                 
                 {/* LEFT MASCOT: Mahasiswa Preneur (Symmetrical Position & Scale) */}
-                <div className="flex flex-col items-center justify-end z-20 shrink-0 select-none -mr-6 sm:-mr-8 md:-mr-12 lg:-mr-14 xl:-mr-16 animate-mascot-left">
+                <div className="flex flex-col items-center justify-end z-20 shrink-0 select-none -mr-12 sm:-mr-16 md:-mr-20 lg:-mr-24 xl:-mr-28 animate-mascot-left">
                   {/* Symmetrical Top Badge */}
                   <div className="mb-2 px-3 py-1 rounded-full bg-emerald-500 text-slate-950 font-black text-[10px] sm:text-xs tracking-wide shadow-lg border border-emerald-300 flex items-center gap-1.5 whitespace-nowrap">
                     <span>✌️</span>
@@ -320,15 +320,15 @@ export const LandingPage = ({ setActiveTab }) => {
                     <img
                       src="/maskot_mahasiswa_3d.png"
                       alt="Maskot Mahasiswa Preneur Papua"
-                      className="h-52 sm:h-60 md:h-70 lg:h-80 xl:h-88 w-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.65)] pointer-events-none"
+                      className="h-56 sm:h-64 md:h-72 lg:h-[350px] xl:h-[380px] w-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.65)] pointer-events-none"
                     />
                     <div className="w-20 sm:w-28 h-2.5 bg-black/50 rounded-full blur-sm mx-auto -mt-1 animate-mascot-shadow-left" />
                   </div>
                 </div>
 
                 {/* CENTER: ENLARGED 3D Slide Carousel (Larger, High-Res, Cinematic Frame) */}
-                <div className="flex-1 w-full max-w-[360px] sm:max-w-[440px] md:max-w-[500px] lg:max-w-[560px] xl:max-w-[620px] z-10">
-                  <div className="relative aspect-[16/11] max-h-[350px] sm:max-h-[400px] md:max-h-[440px] lg:max-h-[480px] overflow-hidden rounded-[28px] sm:rounded-[36px] border border-white/20 shadow-2xl bg-slate-950 group">
+                <div className="flex-1 w-full max-w-[460px] sm:max-w-[540px] md:max-w-[600px] lg:max-w-[640px] xl:max-w-[680px] z-10">
+                  <div className="relative w-full h-[320px] sm:h-[370px] md:h-[415px] lg:h-[445px] xl:h-[465px] overflow-hidden rounded-[28px] sm:rounded-[36px] border border-white/20 shadow-2xl bg-slate-950 group">
                     {heroSlides.map((slide, idx) => {
                       const isActive = idx === currentSlide;
                       return (
@@ -390,7 +390,7 @@ export const LandingPage = ({ setActiveTab }) => {
                 </div>
 
                 {/* RIGHT MASCOT: Mentor & Pembimbing (Symmetrical Position & Scale) */}
-                <div className="flex flex-col items-center justify-end z-20 shrink-0 select-none -ml-6 sm:-ml-8 md:-ml-12 lg:-ml-14 xl:-ml-16 animate-mascot-right">
+                <div className="flex flex-col items-center justify-end z-20 shrink-0 select-none -ml-12 sm:-ml-16 md:-ml-20 lg:-ml-24 xl:-ml-28 animate-mascot-right">
                   {/* Symmetrical Top Badge */}
                   <div className="mb-2 px-3 py-1 rounded-full bg-amber-500 text-slate-950 font-black text-[10px] sm:text-xs tracking-wide shadow-lg border border-amber-300 flex items-center gap-1.5 whitespace-nowrap">
                     <span>⭐</span>
@@ -400,7 +400,7 @@ export const LandingPage = ({ setActiveTab }) => {
                     <img
                       src="/maskot_mentor_3d.png"
                       alt="Maskot Pendamping & Mentor"
-                      className="h-52 sm:h-60 md:h-70 lg:h-80 xl:h-88 w-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.65)] pointer-events-none"
+                      className="h-56 sm:h-64 md:h-72 lg:h-[350px] xl:h-[380px] w-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.65)] pointer-events-none"
                     />
                     <div className="w-20 sm:w-28 h-2.5 bg-black/50 rounded-full blur-sm mx-auto -mt-1 animate-mascot-shadow-right" />
                   </div>
