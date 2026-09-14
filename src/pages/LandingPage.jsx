@@ -309,10 +309,10 @@ export const LandingPage = ({ setActiveTab }) => {
               {/* Flanking Mascots & Slide Symmetrical Stage (Both Mascots Grounded Symmetrically With Slide) */}
               <div className="relative w-full flex items-end justify-center">
                 
-                {/* LEFT MASCOT: Mahasiswa Preneur (Symmetrical Position & Scale) */}
-                <div className="flex flex-col items-center justify-end z-20 shrink-0 select-none -mr-12 sm:-mr-16 md:-mr-20 lg:-mr-24 xl:-mr-28 animate-mascot-left">
+                {/* LEFT MASCOT: Mahasiswa Preneur (Symmetrical Position & Compact Scale) */}
+                <div className="flex flex-col items-center justify-end z-20 shrink-0 select-none -mr-10 sm:-mr-12 md:-mr-16 lg:-mr-20 xl:-mr-24 animate-mascot-left">
                   {/* Symmetrical Top Badge */}
-                  <div className="mb-2 px-3 py-1 rounded-full bg-emerald-500 text-slate-950 font-black text-[10px] sm:text-xs tracking-wide shadow-lg border border-emerald-300 flex items-center gap-1.5 whitespace-nowrap">
+                  <div className="mb-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500 text-slate-950 font-black text-[9px] sm:text-[10.5px] tracking-wide shadow-lg border border-emerald-300 flex items-center gap-1.5 whitespace-nowrap">
                     <span>✌️</span>
                     <span>Mahasiswa Preneur</span>
                   </div>
@@ -320,15 +320,15 @@ export const LandingPage = ({ setActiveTab }) => {
                     <img
                       src="/maskot_mahasiswa_3d.png"
                       alt="Maskot Mahasiswa Preneur Papua"
-                      className="h-56 sm:h-64 md:h-72 lg:h-[350px] xl:h-[380px] w-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.65)] pointer-events-none"
+                      className="h-40 sm:h-48 md:h-54 lg:h-[240px] xl:h-[260px] w-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.65)] pointer-events-none"
                     />
-                    <div className="w-20 sm:w-28 h-2.5 bg-black/50 rounded-full blur-sm mx-auto -mt-1 animate-mascot-shadow-left" />
+                    <div className="w-16 sm:w-20 h-2 bg-black/50 rounded-full blur-sm mx-auto -mt-1 animate-mascot-shadow-left" />
                   </div>
                 </div>
 
-                {/* CENTER: ENLARGED 3D Slide Carousel (Larger, High-Res, Cinematic Frame) */}
-                <div className="flex-1 w-full max-w-[460px] sm:max-w-[540px] md:max-w-[600px] lg:max-w-[640px] xl:max-w-[680px] z-10">
-                  <div className="relative w-full h-[320px] sm:h-[370px] md:h-[415px] lg:h-[445px] xl:h-[465px] overflow-hidden rounded-[28px] sm:rounded-[36px] border border-white/20 shadow-2xl bg-slate-950 group">
+                {/* CENTER: 3D Slide Carousel (Landscape Widescreen Frame) */}
+                <div className="flex-1 w-full max-w-[500px] sm:max-w-[560px] md:max-w-[620px] lg:max-w-[660px] xl:max-w-[700px] z-10">
+                  <div className="relative w-full h-[250px] sm:h-[280px] md:h-[310px] lg:h-[330px] xl:h-[345px] overflow-hidden rounded-[24px] sm:rounded-[30px] border border-white/20 shadow-2xl bg-slate-950 group">
                     {heroSlides.map((slide, idx) => {
                       const isActive = idx === currentSlide;
                       return (
@@ -345,7 +345,7 @@ export const LandingPage = ({ setActiveTab }) => {
                             loading={idx === 0 ? 'eager' : 'lazy'}
                           />
                           {/* Rich Gradient Scrim & Caption (with generous bottom padding so text never overlaps dots) */}
-                          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/95 via-slate-950/60 to-transparent p-4 sm:p-5 pt-12 pb-10 flex flex-col justify-end">
+                          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/95 via-slate-950/60 to-transparent p-4 sm:p-5 pt-10 pb-9 flex flex-col justify-end">
                             <div className="flex items-center justify-between mb-1">
                               <span className={`text-[10px] sm:text-[11px] font-mono font-extrabold uppercase px-2.5 py-0.5 rounded-md border ${slide.badgeColor}`}>
                                 {slide.badge}
@@ -389,10 +389,10 @@ export const LandingPage = ({ setActiveTab }) => {
                   </div>
                 </div>
 
-                {/* RIGHT MASCOT: Mentor & Pembimbing (Symmetrical Position & Scale) */}
-                <div className="flex flex-col items-center justify-end z-20 shrink-0 select-none -ml-12 sm:-ml-16 md:-ml-20 lg:-ml-24 xl:-ml-28 animate-mascot-right">
+                {/* RIGHT MASCOT: Mentor & Pembimbing (Symmetrical Position & Compact Scale) */}
+                <div className="flex flex-col items-center justify-end z-20 shrink-0 select-none -ml-10 sm:-ml-12 md:-ml-16 lg:-ml-20 xl:-ml-24 animate-mascot-right">
                   {/* Symmetrical Top Badge */}
-                  <div className="mb-2 px-3 py-1 rounded-full bg-amber-500 text-slate-950 font-black text-[10px] sm:text-xs tracking-wide shadow-lg border border-amber-300 flex items-center gap-1.5 whitespace-nowrap">
+                  <div className="mb-1.5 px-2.5 py-0.5 rounded-full bg-amber-500 text-slate-950 font-black text-[9px] sm:text-[10.5px] tracking-wide shadow-lg border border-amber-300 flex items-center gap-1.5 whitespace-nowrap">
                     <span>⭐</span>
                     <span>Mentor & Inkubasi</span>
                   </div>
@@ -400,9 +400,9 @@ export const LandingPage = ({ setActiveTab }) => {
                     <img
                       src="/maskot_mentor_3d.png"
                       alt="Maskot Pendamping & Mentor"
-                      className="h-56 sm:h-64 md:h-72 lg:h-[350px] xl:h-[380px] w-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.65)] pointer-events-none"
+                      className="h-40 sm:h-48 md:h-54 lg:h-[240px] xl:h-[260px] w-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.65)] pointer-events-none"
                     />
-                    <div className="w-20 sm:w-28 h-2.5 bg-black/50 rounded-full blur-sm mx-auto -mt-1 animate-mascot-shadow-right" />
+                    <div className="w-16 sm:w-20 h-2 bg-black/50 rounded-full blur-sm mx-auto -mt-1 animate-mascot-shadow-right" />
                   </div>
                 </div>
 
