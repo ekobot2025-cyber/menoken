@@ -50,20 +50,20 @@ export const Layout = ({ children, activeTab, setActiveTab }) => {
             </div>
 
             {/* Dashboard Footer */}
-            <footer className={`mt-12 pt-6 border-t text-xs flex flex-col md:flex-row items-center justify-between gap-3 ${
+            <footer className={`mt-12 pt-6 border-t text-[10.5px] sm:text-[11px] lg:text-[11.5px] flex flex-col lg:flex-row items-center justify-between gap-2.5 ${
               isDark ? 'border-slate-800/80 text-slate-500' : 'border-slate-200 text-slate-500'
             }`}>
-              <div className="flex items-center gap-2 text-center md:text-left">
-                <img src="/noken_pixar_3d.png" alt="MENOKEN" className="w-4 h-4 object-contain opacity-80 shrink-0" />
+              <div className="flex items-center gap-2 whitespace-nowrap text-center lg:text-left">
+                <img src="/noken_pixar_3d.png" alt="MENOKEN" className="w-3.5 h-3.5 object-contain opacity-80 shrink-0" />
                 <span>© 2026 MENOKEN • Manajemen Ekosistem & Networking Kewirausahaan • UPA Uncen Platform. All rights reserved.</span>
               </div>
-              <div className="flex flex-wrap items-center justify-center md:justify-end gap-1.5">
+              <div className="flex items-center justify-center lg:justify-end gap-1.5 whitespace-nowrap text-[10px] sm:text-[10.5px] lg:text-[11px]">
                 <span>by</span>
                 <a
                   href="https://www.instagram.com/kurniawan_patma"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bold text-amber-500 hover:text-amber-400 hover:underline transition"
+                  className="font-bold text-amber-500 hover:text-amber-400 underline underline-offset-2 transition"
                 >
                   Kurnia Patma
                 </a>
@@ -73,12 +73,12 @@ export const Layout = ({ children, activeTab, setActiveTab }) => {
                   href="https://www.linkedin.com/in/papedatimur"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bold text-cyan-500 hover:text-cyan-400 hover:underline transition"
+                  className="font-bold text-cyan-500 hover:text-cyan-400 underline underline-offset-2 transition"
                 >
                   Enterdie
                 </a>
                 <span className="opacity-50">•</span>
-                <span className="text-[11px] opacity-80">Hak Cipta Dilindungi Undang-Undang</span>
+                <span className="opacity-80">Hak Cipta Dilindungi Undang-Undang</span>
               </div>
             </footer>
           </main>
