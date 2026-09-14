@@ -248,28 +248,28 @@ export const LandingPage = ({ setActiveTab }) => {
                 Wadah digital inkubasi & akselerasi wirausaha mahasiswa 8 Fakultas Universitas Cenderawasih — terinspirasi filosofi Noken Papua untuk merajut sinergi dari Kopi Wamena hingga ekonomi kreatif modern.
               </p>
 
-              {/* Dual Action Buttons (Toba-Quest Exact Styles, 1-Baris Saja) */}
-              <div className="flex flex-wrap items-center gap-3 sm:gap-4 w-full mb-8">
-                {/* Primary Button: MULAI WIRAUSAHA (1-Baris) */}
+              {/* Dual Action Buttons (Compact, Side-by-Side 1-Baris Saja) */}
+              <div className="flex flex-nowrap items-center gap-2.5 sm:gap-3.5 w-full mb-8">
+                {/* Primary Button: MULAI WIRAUSAHA (1-Baris Kompak) */}
                 <button
                   onClick={() => { setAuthTab('login'); setShowAuthModal(true); }}
-                  className="px-5 sm:px-7 py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-600 text-slate-950 font-black text-sm sm:text-base hover:scale-105 transition-transform shadow-xl shadow-cyan-500/40 flex items-center justify-center gap-2.5 cursor-pointer select-none whitespace-nowrap shrink-0"
+                  className="px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-600 text-slate-950 font-extrabold text-xs sm:text-sm hover:scale-105 transition-transform shadow-lg shadow-cyan-500/30 flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer select-none whitespace-nowrap shrink-0"
                 >
-                  <Rocket className="w-4 h-4 sm:w-5 sm:h-5 text-slate-950 shrink-0" />
-                  <span className="whitespace-nowrap font-black tracking-wide">MULAI WIRAUSAHA</span>
+                  <Rocket className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-950 shrink-0" />
+                  <span className="whitespace-nowrap font-extrabold tracking-wide">MULAI WIRAUSAHA</span>
                 </button>
 
-                {/* Secondary Button: PELAJARI CARA KERJA (1-Baris) */}
+                {/* Secondary Button: PELAJARI CARA KERJA (1-Baris Kompak) */}
                 <a
                   href="#how-it-works"
-                  className={`px-5 sm:px-7 py-3.5 sm:py-4 rounded-2xl font-black text-sm sm:text-base border transition-all flex items-center justify-center gap-2 cursor-pointer select-none text-center whitespace-nowrap shrink-0 ${
+                  className={`px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl font-extrabold text-xs sm:text-sm border transition-all flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer select-none text-center whitespace-nowrap shrink-0 ${
                     isDark 
-                      ? 'bg-slate-800/70 hover:bg-slate-700/80 text-white border-white/20 hover:border-white/40' 
+                      ? 'bg-slate-800/80 hover:bg-slate-700 text-white border-white/20 hover:border-white/40' 
                       : 'bg-white hover:bg-slate-100 text-slate-900 border-slate-300 hover:border-slate-400 shadow-xs'
                   }`}
                 >
-                  <span className="whitespace-nowrap font-black tracking-wide">PELAJARI CARA KERJA</span>
-                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+                  <span className="whitespace-nowrap font-extrabold tracking-wide">PELAJARI CARA KERJA</span>
+                  <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
                 </a>
               </div>
 
