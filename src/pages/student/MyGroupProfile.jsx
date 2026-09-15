@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { saveGroup, getMasterData } from '../../lib/storage';
+import { saveGroup, getGroups, getMasterData } from '../../lib/storage';
 import { LegalBadge } from '../../components/LegalBadge';
 import { GrowthScoreGauge } from '../../components/GrowthScoreGauge';
 import { LevelBadge } from '../../components/LevelBadge';
@@ -25,6 +25,26 @@ export const MyGroupProfile = () => {
   const [groupData, setGroupData] = useState({ ...activeGroup });
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [qrModalOpen, setQrModalOpen] = useState(false);
+
+  // Sync groupData when activeGroup changes
+  useEffect(() => {
+    if (activeGroup) {
+      setGroupData({ ...activeGroup });
+    }
+  }, [activeGroup]);
+
+  // Real-time sync when Admin updates legalities or group data
+  useEffect(() => {
+    const handleStorageUpdate = () => {
+      const groups = getGroups();
+      const current = groups.find(g => g.id === activeGroup?.id);
+      if (current) {
+        setGroupData({ ...current });
+      }
+    };
+    window.addEventListener('menoken-storage-update', handleStorageUpdate);
+    return () => window.removeEventListener('menoken-storage-update', handleStorageUpdate);
+  }, [activeGroup?.id]);
 
   const masterData = getMasterData();
   const faculties = masterData?.faculties || [];

@@ -119,9 +119,14 @@ export const AuthProvider = ({ children }) => {
   const [activeGroup, setActiveGroup] = useState(null);
 
   useEffect(() => {
-    const groups = getGroups();
-    const g = groups.find(x => x.id === selectedGroupId) || groups[0];
-    setActiveGroup(g);
+    const updateActiveGroup = () => {
+      const groups = getGroups();
+      const g = groups.find(x => x.id === selectedGroupId) || groups[0];
+      setActiveGroup(g);
+    };
+    updateActiveGroup();
+    window.addEventListener('menoken-storage-update', updateActiveGroup);
+    return () => window.removeEventListener('menoken-storage-update', updateActiveGroup);
   }, [selectedGroupId]);
 
   const switchRole = (newRole) => {
