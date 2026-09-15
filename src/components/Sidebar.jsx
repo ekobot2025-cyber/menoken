@@ -117,7 +117,7 @@ export const Sidebar = ({ activeTab, setActiveTab, isOpen, onClose }) => {
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed lg:static top-16 bottom-0 left-0 w-64 border-r z-40 transition-all duration-300 ease-in-out flex flex-col justify-between no-print ${
+        className={`fixed lg:static top-16 bottom-0 left-0 w-64 border-r z-40 transition-all duration-300 ease-in-out flex flex-col justify-between no-print shrink-0 ${
           isDark ? 'bg-[#04201b] border-emerald-900/50 text-slate-100' : 'bg-white border-slate-200 text-slate-800'
         } ${
           isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'

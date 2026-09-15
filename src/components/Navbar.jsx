@@ -310,7 +310,13 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
               {/* Shortcut to Dashboard Workspace */}
               <button
                 onClick={() => {
-                  const targetView = role === 'student' ? 'student_dashboard' : `${role}_dashboard`;
+                  const targetView = role === 'student' ? 'student_dashboard' 
+                    : role === 'reviewer' ? 'reviewer_dashboard'
+                    : role === 'mentor' ? 'admin_mentoring'
+                    : role === 'leadership' ? 'leadership_dashboard'
+                    : role === 'superadmin' ? 'admin_dashboard'
+                    : role === 'admin' ? 'admin_dashboard'
+                    : 'landing';
                   setActiveTab(targetView);
                 }}
                 className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-md shadow-emerald-950/30 transition cursor-pointer whitespace-nowrap"
@@ -381,7 +387,13 @@ export const Navbar = ({ onToggleSidebar, sidebarOpen, activeTab, setActiveTab }
                     <div className="border-t border-slate-800/40 mt-1 pt-1">
                       <button
                         onClick={() => {
-                          const targetView = role === 'student' ? 'student_dashboard' : `${role}_dashboard`;
+                          const targetView = role === 'student' ? 'student_dashboard' 
+                            : role === 'reviewer' ? 'reviewer_dashboard'
+                            : role === 'mentor' ? 'admin_mentoring'
+                            : role === 'leadership' ? 'leadership_dashboard'
+                            : role === 'superadmin' ? 'admin_dashboard'
+                            : role === 'admin' ? 'admin_dashboard'
+                            : 'landing';
                           setActiveTab(targetView);
                           setRoleMenuOpen(false);
                         }}

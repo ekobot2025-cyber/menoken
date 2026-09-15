@@ -9,11 +9,36 @@ export const Layout = ({ children, activeTab, setActiveTab }) => {
   const { roleInfo } = useAuth();
   const { isDark } = useTheme();
 
-  // If on landing, login, market, or partner hub, full width standalone container (no left sidebar, but WITH the unified top navbar!)
-  const isPublicStandalone = activeTab === 'landing' || activeTab === 'login' || activeTab === 'market' || activeTab === 'partner_hub' || activeTab === 'group_public_profile';
+  // Explicit list of authenticated workspace dashboard tabs with a left sidebar
+  const DASHBOARD_TABS = [
+    'student_dashboard',
+    'student_profile',
+    'student_proposal',
+    'student_products',
+    'student_pos',
+    'student_revenue',
+    'student_impact',
+    'student_logbook',
+    'reviewer_dashboard',
+    'admin_dashboard',
+    'superadmin_dashboard',
+    'admin_programs',
+    'admin_proposals',
+    'admin_ranking',
+    'admin_verification',
+    'admin_funding',
+    'admin_mentoring',
+    'mentor_dashboard',
+    'leadership_dashboard',
+    'admin_master',
+    'admin_audit'
+  ];
+
+  // Landing, login, market, and any fallback tab is standalone full-width (NO left sidebar)
+  const isPublicStandalone = !DASHBOARD_TABS.includes(activeTab);
 
   return (
-    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-200 ${
+    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-200 overflow-x-hidden ${
       isDark ? 'bg-[#060c18] text-slate-100' : 'bg-slate-50 text-slate-900'
     }`}>
       {/* Universal Top Navbar visible on EVERY page as requested by user */}

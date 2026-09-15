@@ -285,7 +285,7 @@ export const LandingPage = ({ setActiveTab }) => {
                       key={acc.role}
                       onClick={() => {
                         loginAsDummy(acc.key);
-                        const targetTab = acc.key === 'student' ? 'student_dashboard' : acc.key === 'reviewer' ? 'reviewer_dashboard' : `${acc.key}_dashboard`;
+                        const targetTab = acc.defaultTab || 'admin_dashboard';
                         setActiveTab(targetTab);
                       }}
                       className={`px-3 py-1.5 rounded-xl border text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
@@ -851,7 +851,7 @@ export const LandingPage = ({ setActiveTab }) => {
                         onClick={() => {
                           loginAsDummy(acc.key);
                           setShowAuthModal(false);
-                          const targetTab = acc.key === 'student' ? 'student_dashboard' : acc.key === 'reviewer' ? 'reviewer_dashboard' : `${acc.key}_dashboard`;
+                          const targetTab = acc.defaultTab || 'admin_dashboard';
                           setActiveTab(targetTab);
                         }}
                         className={`p-2 rounded-xl border text-xs font-bold transition text-center cursor-pointer ${

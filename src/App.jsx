@@ -89,8 +89,9 @@ const AppContent = () => {
       case 'reviewer_dashboard':
         return <ReviewerDashboard />;
 
-      // Admin views
+      // Admin & Superadmin views
       case 'admin_dashboard':
+      case 'superadmin_dashboard':
         return <AdminDashboard setActiveTab={handleSetActiveTab} />;
       case 'admin_programs':
         return <AdminPrograms />;
@@ -103,6 +104,7 @@ const AppContent = () => {
       case 'admin_funding':
         return <AdminFunding />;
       case 'admin_mentoring':
+      case 'mentor_dashboard':
         return <AdminMentoringTraining />;
 
       // Leadership & Superadmin views
