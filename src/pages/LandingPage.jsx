@@ -118,23 +118,6 @@ export const LandingPage = ({ setActiveTab }) => {
     setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
   };
 
-  // Scroll to Top visibility tracker
-  const [showScrollTop, setShowScrollTop] = useState(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 240) {
-        setShowScrollTop(true);
-      } else {
-        setShowScrollTop(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   // Login form state
   const [loginEmail, setLoginEmail] = useState('');
@@ -767,22 +750,6 @@ export const LandingPage = ({ setActiveTab }) => {
       </footer>
 
 
-      {/* ========================================================= */}
-      {/* 8. FLOATING SCROLL TO TOP BUTTON                          */}
-      {/* ========================================================= */}
-      <button
-        onClick={scrollToTop}
-        className={`fixed bottom-6 right-6 z-50 p-3 sm:p-3.5 rounded-2xl shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95 group flex items-center justify-center cursor-pointer border ${
-          showScrollTop ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-4 pointer-events-none'
-        } ${
-          isDark
-            ? 'bg-gradient-to-br from-cyan-500 to-teal-500 border-cyan-400/40 text-slate-950 shadow-cyan-500/30 hover:shadow-cyan-400/60'
-            : 'bg-gradient-to-br from-emerald-600 to-teal-600 border-emerald-400/40 text-white shadow-emerald-600/30 hover:shadow-emerald-500/60'
-        }`}
-        title="Kembali ke halaman paling atas"
-      >
-        <ChevronUp className="w-5 h-5 stroke-[2.8] group-hover:-translate-y-0.5 transition-transform duration-200" />
-      </button>
 
 
       {/* ========================================================= */}

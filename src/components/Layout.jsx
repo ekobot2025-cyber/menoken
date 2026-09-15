@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Navbar } from './Navbar';
 import { Sidebar } from './Sidebar';
+import { ScrollToTopButton } from './ScrollToTopButton';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 
@@ -108,6 +109,9 @@ export const Layout = ({ children, activeTab, setActiveTab }) => {
           </main>
         </div>
       )}
+
+      {/* Universal Floating Scroll To Top Arrow Button */}
+      <ScrollToTopButton activeTab={activeTab} />
     </div>
   );
 };
