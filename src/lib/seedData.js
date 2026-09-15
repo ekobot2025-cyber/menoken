@@ -6,49 +6,135 @@ export const INITIAL_MASTER_DATA = {
       id: "feb",
       name: "Fakultas Ekonomi dan Bisnis",
       short: "FEB",
-      programs: ["Manajemen", "Akuntansi", "Ekonomi Pembangunan"]
+      programs: [
+        "S1 Manajemen",
+        "S1 Akuntansi",
+        "S1 Ekonomi Pembangunan",
+        "D3 Akuntansi",
+        "D3 Keuangan & Perbankan",
+        "S2 Magister Manajemen (MM)",
+        "S2 Magister Ilmu Ekonomi (MIE)",
+        "S2 Magister Keuangan Daerah",
+        "S3 Doktor Ilmu Manajemen"
+      ]
     },
     {
       id: "fkip",
       name: "Fakultas Keguruan dan Ilmu Pendidikan",
       short: "FKIP",
-      programs: ["Pendidikan Bahasa Inggris", "Pendidikan Biologi", "Pendidikan Matematika", "Pendidikan Guru Sekolah Dasar"]
+      programs: [
+        "S1 Pendidikan Bahasa Inggris",
+        "S1 Pendidikan Bahasa dan Sastra Indonesia",
+        "S1 Pendidikan Biologi",
+        "S1 Pendidikan Matematika",
+        "S1 Pendidikan Fisika",
+        "S1 Pendidikan Kimia",
+        "S1 Pendidikan Guru Sekolah Dasar (PGSD)",
+        "S1 Pendidikan Guru PAUD (PGPAUD)",
+        "S1 Pendidikan Jasmani, Kesehatan dan Rekreasi (PJKR)",
+        "S1 Pendidikan Geografi",
+        "S1 Pendidikan Sejarah",
+        "S1 Pendidikan Pancasila dan Kewarganegaraan (PPKn)",
+        "S1 Bimbingan dan Konseling",
+        "S2 Pendidikan IPS",
+        "S2 Pendidikan Bahasa Inggris",
+        "S2 Manajemen Pendidikan"
+      ]
     },
     {
       id: "fmipa",
       name: "Fakultas Matematika dan Ilmu Pengetahuan Alam",
       short: "FMIPA",
-      programs: ["Biologi", "Kimia", "Fisika", "Matematika", "Farmasi", "Sistem Informasi", "Ilmu Kelautan"]
+      programs: [
+        "S1 Matematika",
+        "S1 Fisika",
+        "S1 Kimia",
+        "S1 Biologi",
+        "S1 Farmasi",
+        "S1 Sistem Informasi",
+        "S1 Ilmu Kelautan",
+        "S1 Statistika",
+        "S1 Geofisika",
+        "D3 Farmasi",
+        "S2 Magister Biologi"
+      ]
     },
     {
       id: "fisip",
       name: "Fakultas Ilmu Sosial dan Ilmu Politik",
       short: "FISIP",
-      programs: ["Ilmu Komunikasi", "Ilmu Pemerintahan", "Sosiologi", "Hubungan Internasional", "Antropologi"]
+      programs: [
+        "S1 Ilmu Administrasi Publik",
+        "S1 Ilmu Administrasi Bisnis",
+        "S1 Ilmu Pemerintahan",
+        "S1 Ilmu Komunikasi",
+        "S1 Sosiologi",
+        "S1 Hubungan Internasional",
+        "S1 Antropologi Sosial",
+        "S1 Ilmu Kesejahteraan Sosial",
+        "S2 Magister Ilmu Administrasi Publik",
+        "S2 Magister Sosiologi",
+        "S3 Doktor Ilmu Sosial"
+      ]
     },
     {
       id: "ft",
       name: "Fakultas Teknik",
       short: "FT",
-      programs: ["Teknik Sipil", "Teknik Elektro", "Teknik Mesin", "Teknik Pertambangan", "Teknik Informatika"]
+      programs: [
+        "S1 Teknik Sipil",
+        "S1 Teknik Mesin",
+        "S1 Teknik Elektro",
+        "S1 Teknik Pertambangan",
+        "S1 Teknik Informatika",
+        "S1 Perencanaan Wilayah dan Kota (PWK)",
+        "S1 Teknik Lingkungan",
+        "D3 Teknik Sipil",
+        "D3 Teknik Mesin",
+        "D3 Teknik Elektro",
+        "S2 Magister Teknik Sipil"
+      ]
     },
     {
       id: "fh",
       name: "Fakultas Hukum",
       short: "FH",
-      programs: ["Ilmu Hukum"]
+      programs: [
+        "S1 Ilmu Hukum",
+        "S2 Magister Ilmu Hukum",
+        "S3 Doktor Ilmu Hukum"
+      ]
     },
     {
       id: "fk",
       name: "Fakultas Kedokteran",
       short: "FK",
-      programs: ["Pendidikan Dokter", "Ilmu Keperawatan"]
+      programs: [
+        "S1 Pendidikan Dokter",
+        "Profesi Dokter",
+        "S1 Ilmu Keperawatan",
+        "Profesi Ners",
+        "S1 Farmasi Klinis"
+      ]
     },
     {
       id: "fkm",
       name: "Fakultas Kesehatan Masyarakat",
       short: "FKM",
-      programs: ["Kesehatan Masyarakat", "Ilmu Gizi"]
+      programs: [
+        "S1 Ilmu Kesehatan Masyarakat",
+        "S1 Ilmu Gizi",
+        "S2 Magister Kesehatan Masyarakat"
+      ]
+    },
+    {
+      id: "pps",
+      name: "Program Pascasarjana",
+      short: "PPs",
+      programs: [
+        "S2 Magister Ilmu Lingkungan",
+        "S3 Doktor Ilmu Lingkungan"
+      ]
     }
   ],
   categories: [

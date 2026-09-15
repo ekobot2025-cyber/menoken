@@ -66,7 +66,7 @@ export const LogbookMbkm = () => {
         <div>
           <div className="text-xs font-bold text-uncen-teal uppercase tracking-widest flex items-center gap-1.5">
             <BookOpen className="w-3.5 h-3.5" />
-            Adopsi Fitur SIMBELMAWA / P2MW
+            Logbook MBKM Standar Kemendikbudristek (P2MW)
           </div>
           <h1 className="text-2xl font-black text-slate-900">
             E-Logbook Wirausaha & Konversi SKS MBKM

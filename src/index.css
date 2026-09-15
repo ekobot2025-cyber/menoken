@@ -84,12 +84,49 @@
 }
 
 @media print {
+  @page {
+    margin: 0;
+    size: 80mm auto;
+  }
+
   body {
     background: #ffffff !important;
     color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
+
   .no-print {
     display: none !important;
+  }
+
+  /* When printing receipt, hide all background elements and print ONLY the thermal receipt */
+  body.printing-receipt header,
+  body.printing-receipt nav,
+  body.printing-receipt aside,
+  body.printing-receipt footer,
+  body.printing-receipt main > *:not(#printable-receipt-modal),
+  body.printing-receipt #printable-receipt-modal {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    position: static !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  body.printing-receipt #printable-receipt {
+    position: static !important;
+    display: block !important;
+    width: 78mm !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 4mm !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: none !important;
+    box-shadow: none !important;
+    font-family: "Courier New", Courier, monospace !important;
+    font-size: 11px !important;
   }
 }
 

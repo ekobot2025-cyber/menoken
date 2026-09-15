@@ -57,7 +57,7 @@ export const PartnerInvestorHub = () => {
         <div className="max-w-2xl space-y-3 relative z-10">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30 text-xs font-bold uppercase tracking-wider">
             <Handshake className="w-3.5 h-3.5" />
-            Adopsi Fitur F6S & Gust
+            Jejaring Kemitraan & Akselerasi Usaha
           </div>
           <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
             Papan Temu Mitra & Investor Cenderawasih

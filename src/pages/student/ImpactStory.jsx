@@ -54,7 +54,7 @@ export const ImpactStory = () => {
         <div>
           <div className="text-xs font-bold text-emerald-600 uppercase tracking-widest flex items-center gap-1.5">
             <Leaf className="w-3.5 h-3.5" />
-            Adopsi Fitur GHG Tracker Hub
+            Laporan Emisi & Dampak Berkelanjutan (GHG Tracker)
           </div>
           <h1 className="text-2xl font-black text-slate-900">
             Story of Impact & Green Metrics Papua

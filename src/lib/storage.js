@@ -59,7 +59,16 @@ const setItem = (key, val) => {
 };
 
 // Master Data
-export const getMasterData = () => getItem(STORAGE_KEYS.MASTER, INITIAL_MASTER_DATA);
+export const getMasterData = () => {
+  const data = getItem(STORAGE_KEYS.MASTER, INITIAL_MASTER_DATA);
+  if (!data || !data.faculties || data.faculties.length < INITIAL_MASTER_DATA.faculties.length) {
+    return {
+      ...data,
+      faculties: INITIAL_MASTER_DATA.faculties
+    };
+  }
+  return data;
+};
 export const saveMasterData = (data) => {
   setItem(STORAGE_KEYS.MASTER, data);
   addAuditLog('Pembaruan Master Data Sistem', 'Admin mengubah konfigurasi fakultas/prodi/bobot');

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { getProducts, addTransaction } from '../../lib/storage';
+import { generateReceiptJpeg, downloadReceiptJpeg } from '../../utils/receiptCanvas';
 import {
   Calculator,
   Plus,
@@ -13,7 +14,9 @@ import {
   X,
   CreditCard,
   Banknote,
-  Sparkles
+  Sparkles,
+  Download,
+  Share2
 } from 'lucide-react';
 
 export const PosCashier = () => {
@@ -26,6 +29,7 @@ export const PosCashier = () => {
   const [cashGiven, setCashGiven] = useState('');
   const [customerName, setCustomerName] = useState('');
   const [receiptTrx, setReceiptTrx] = useState(null);
+  const [isGeneratingJpeg, setIsGeneratingJpeg] = useState(false);
 
   const addToCart = (product) => {
     const existing = cart.find(item => item.id === product.id);
@@ -84,35 +88,84 @@ export const PosCashier = () => {
     clearCart();
   };
 
-  const handleShareReceiptWhatsApp = () => {
+  const handlePrintReceipt = () => {
+    document.body.classList.add('printing-receipt');
+    window.print();
+    setTimeout(() => {
+      document.body.classList.remove('printing-receipt');
+    }, 1000);
+  };
+
+  const handleShareReceiptWhatsApp = async () => {
     if (!receiptTrx) return;
-    const itemsList = receiptTrx.items
-      .map(it => `• ${it.name} x${it.qty} = Rp${it.subtotal.toLocaleString('id-ID')}`)
-      .join('\n');
-    const msg = encodeURIComponent(
-      `*STRUK PEMBELIAN MENOKEN*
-` +
-      `Stan: ${receiptTrx.groupName}
-` +
-      `No. Transaksi: ${receiptTrx.id}
-` +
-      `Tanggal: ${receiptTrx.date}
-` +
-      `Pelanggan: ${receiptTrx.customerName}
+    setIsGeneratingJpeg(true);
 
-` +
-      `*Rincian Belanja:*
-${itemsList}
+    try {
+      // 1. Generate high-resolution JPEG receipt
+      const { dataUrl, blob, filename } = await generateReceiptJpeg(receiptTrx);
 
-` +
-      `*Total: Rp${receiptTrx.totalAmount.toLocaleString('id-ID')}*
-` +
-      `Metode: ${receiptTrx.paymentMethod}
+      // 2. Automatically download the JPEG receipt to device
+      downloadReceiptJpeg(dataUrl, filename);
 
-` +
-      `Terima kasih telah mendukung produk mahasiswa Universitas Cenderawasih!`
-    );
-    window.open(`https://wa.me/?text=${msg}`, '_blank');
+      // 3. Format message text
+      const itemsList = receiptTrx.items
+        .map(it => `• ${it.name} x${it.qty} = Rp${it.subtotal.toLocaleString('id-ID')}`)
+        .join('\n');
+
+      const msg = encodeURIComponent(
+        `*STRUK PEMBELIAN RESMI MENOKEN*\n` +
+        `Stan: *${receiptTrx.groupName}*\n` +
+        `No. Transaksi: *${receiptTrx.id}*\n` +
+        `Tanggal: ${receiptTrx.date}\n` +
+        `Pelanggan: ${receiptTrx.customerName}\n\n` +
+        `*Rincian Belanja:*\n${itemsList}\n\n` +
+        `*Total: Rp${receiptTrx.totalAmount.toLocaleString('id-ID')}*\n` +
+        `Metode: ${receiptTrx.paymentMethod}\n` +
+        `Status: *LUNAS (PAID)*\n\n` +
+        `📎 *Struk Digital (JPEG)* telah tersimpan otomatis di perangkat Anda dan siap dilampirkan.\n` +
+        `Terima kasih telah mendukung produk wirausaha muda Universitas Cenderawasih!`
+      );
+
+      // 4. If device supports Web Share API with files (Android/iOS WhatsApp), share directly!
+      if (blob && navigator.canShare) {
+        const file = new File([blob], filename, { type: 'image/jpeg' });
+        if (navigator.canShare({ files: [file] })) {
+          try {
+            await navigator.share({
+              files: [file],
+              title: `Struk MENOKEN - ${receiptTrx.id}`,
+              text: `Struk Pembelian MENOKEN - ${receiptTrx.groupName}`
+            });
+            setIsGeneratingJpeg(false);
+            return;
+          } catch (err) {
+            if (err.name !== 'AbortError') {
+              console.log('Web Share fallback to wa.me');
+            }
+          }
+        }
+      }
+
+      // 5. Open WhatsApp
+      window.open(`https://wa.me/?text=${msg}`, '_blank');
+    } catch (err) {
+      console.error('Failed to generate receipt JPEG:', err);
+    } finally {
+      setIsGeneratingJpeg(false);
+    }
+  };
+
+  const handleDownloadJpeg = async () => {
+    if (!receiptTrx) return;
+    setIsGeneratingJpeg(true);
+    try {
+      const { dataUrl, filename } = await generateReceiptJpeg(receiptTrx);
+      downloadReceiptJpeg(dataUrl, filename);
+    } catch (err) {
+      console.error('Failed to download JPEG:', err);
+    } finally {
+      setIsGeneratingJpeg(false);
+    }
   };
 
   return (
@@ -121,7 +174,7 @@ ${itemsList}
         <div>
           <div className="text-xs font-bold text-uncen-teal uppercase tracking-widest flex items-center gap-1.5">
             <Calculator className="w-3.5 h-3.5" />
-            Adopsi Fitur Toko Digital ID
+            Kasir POS & Toko Digital ID
           </div>
           <h1 className="text-2xl font-black text-slate-900">
             Kasir Digital POS (Festival & Penjualan Harian)
@@ -321,40 +374,50 @@ ${itemsList}
 
       {/* Digital Receipt Modal (Toko Digital ID Feature) */}
       {receiptTrx && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl relative animate-in zoom-in-95 font-mono text-xs">
+        <div
+          id="printable-receipt-modal"
+          onClick={() => setReceiptTrx(null)}
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto"
+        >
+          <div
+            id="printable-receipt"
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl relative animate-in zoom-in-95 font-mono text-xs text-slate-900 border border-slate-200"
+          >
             <button
+              type="button"
               onClick={() => setReceiptTrx(null)}
-              className="absolute top-4 right-4 p-1 rounded-full text-slate-400 hover:text-slate-600"
+              className="absolute top-4 right-4 p-1.5 rounded-full text-slate-400 hover:text-slate-600 no-print cursor-pointer"
+              title="Tutup"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="text-center pb-3 border-b border-dashed border-slate-300">
-              <div className="font-black text-sm text-slate-900">MENOKEN UNCEN</div>
-              <div className="text-[11px] text-slate-600 font-bold">{receiptTrx.groupName}</div>
-              <div className="text-[10px] text-slate-400 mt-0.5">{receiptTrx.date}</div>
-              <div className="text-[10px] text-slate-400">ID: {receiptTrx.id}</div>
+              <div className="font-black text-sm text-slate-900 tracking-wider">MENOKEN UNCEN</div>
+              <div className="text-[11px] text-emerald-700 font-bold">{receiptTrx.groupName}</div>
+              <div className="text-[10px] text-slate-500 mt-0.5">{receiptTrx.date}</div>
+              <div className="text-[10px] text-slate-500 font-bold">ID: {receiptTrx.id}</div>
             </div>
 
             <div className="py-3 space-y-2 border-b border-dashed border-slate-300">
-              <div className="text-[10px] text-slate-500">Pelanggan: {receiptTrx.customerName}</div>
+              <div className="text-[10px] text-slate-600 font-semibold">Pelanggan: {receiptTrx.customerName}</div>
               {receiptTrx.items.map((item, idx) => (
-                <div key={idx} className="flex justify-between text-[11px]">
+                <div key={idx} className="flex justify-between text-[11px] text-slate-900">
                   <span>{item.name} x{item.qty}</span>
                   <span className="font-bold">Rp{item.subtotal.toLocaleString('id-ID')}</span>
                 </div>
               ))}
             </div>
 
-            <div className="py-3 space-y-1">
+            <div className="py-3 space-y-1 border-b border-dashed border-slate-300">
               <div className="flex justify-between text-xs font-black text-slate-900">
                 <span>TOTAL:</span>
                 <span>Rp{receiptTrx.totalAmount.toLocaleString('id-ID')}</span>
               </div>
-              <div className="flex justify-between text-[10px] text-slate-500">
+              <div className="flex justify-between text-[10px] text-slate-600">
                 <span>Metode:</span>
-                <span>{receiptTrx.paymentMethod}</span>
+                <span className="font-semibold">{receiptTrx.paymentMethod}</span>
               </div>
               <div className="flex justify-between text-[10px] text-emerald-600 font-bold">
                 <span>STATUS:</span>
@@ -362,22 +425,46 @@ ${itemsList}
               </div>
             </div>
 
-            <div className="text-center pt-2 pb-4 text-[10px] text-slate-400">
+            <div className="text-center pt-2 pb-4 text-[10px] text-slate-500">
               Terima kasih atas dukungan Anda untuk wirausaha muda Universitas Cenderawasih!
             </div>
 
-            <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100 font-sans">
+            {/* Action Buttons: Cetak Struk, Unduh JPEG, Kirim WA JPEG */}
+            <div className="pt-2 border-t border-slate-100 font-sans space-y-2 no-print">
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={handlePrintReceipt}
+                  className="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center gap-1.5 transition cursor-pointer border border-slate-200"
+                >
+                  <Printer className="w-3.5 h-3.5" />
+                  <span>Cetak Struk</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleDownloadJpeg}
+                  disabled={isGeneratingJpeg}
+                  className="py-2.5 px-3 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 font-bold text-xs flex items-center justify-center gap-1.5 transition cursor-pointer border border-amber-200"
+                >
+                  <Download className="w-3.5 h-3.5 text-amber-600" />
+                  <span>Unduh JPEG</span>
+                </button>
+              </div>
+
               <button
-                onClick={() => window.print()}
-                className="py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center gap-1.5"
-              >
-                <Printer className="w-3.5 h-3.5" /> Cetak
-              </button>
-              <button
+                type="button"
                 onClick={handleShareReceiptWhatsApp}
-                className="py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-1.5"
+                disabled={isGeneratingJpeg}
+                className="w-full py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-emerald-950/20 transition cursor-pointer"
               >
-                <MessageCircle className="w-3.5 h-3.5" /> Kirim WA
+                {isGeneratingJpeg ? (
+                  <span className="flex items-center gap-1.5">Memproses Struk JPEG...</span>
+                ) : (
+                  <>
+                    <MessageCircle className="w-4 h-4" />
+                    <span>Kirim Struk (JPEG ke WA)</span>
+                  </>
+                )}
               </button>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { saveGroup } from '../../lib/storage';
+import { saveGroup, getMasterData } from '../../lib/storage';
 import { LegalBadge } from '../../components/LegalBadge';
 import { GrowthScoreGauge } from '../../components/GrowthScoreGauge';
 import { LevelBadge } from '../../components/LevelBadge';
@@ -25,6 +25,36 @@ export const MyGroupProfile = () => {
   const [groupData, setGroupData] = useState({ ...activeGroup });
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [qrModalOpen, setQrModalOpen] = useState(false);
+
+  const masterData = getMasterData();
+  const faculties = masterData?.faculties || [];
+
+  const selectedFacultyObj = faculties.find(
+    f => f.name === groupData.facultyName || f.short === groupData.faculty || f.short === groupData.facultyName
+  ) || faculties[0];
+
+  const availablePrograms = selectedFacultyObj ? selectedFacultyObj.programs : [];
+
+  const handleFacultyChange = (e) => {
+    const selectedShort = e.target.value;
+    const fac = faculties.find(f => f.short === selectedShort);
+    if (fac) {
+      setGroupData(prev => ({
+        ...prev,
+        faculty: fac.short,
+        facultyName: fac.name,
+        studyProgram: fac.programs[0] || ''
+      }));
+    }
+  };
+
+  const handleStudyProgramChange = (e) => {
+    const prog = e.target.value;
+    setGroupData(prev => ({
+      ...prev,
+      studyProgram: prog
+    }));
+  };
 
   const handleSave = (e) => {
     e.preventDefault();
@@ -127,22 +157,36 @@ export const MyGroupProfile = () => {
             </div>
 
             <div>
-              <label className="block font-semibold text-slate-700 mb-1">Fakultas</label>
-              <input
-                type="text"
-                disabled
-                value={groupData.facultyName || ''}
-                className="w-full px-3 py-2 bg-slate-100 border border-slate-200 rounded-xl text-slate-500 cursor-not-allowed"
-              />
+              <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
+                Fakultas <span className="text-rose-500">*</span>
+              </label>
+              <select
+                value={selectedFacultyObj?.short || ''}
+                onChange={handleFacultyChange}
+                className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:border-amber-500 cursor-pointer"
+              >
+                {faculties.map((f) => (
+                  <option key={f.id} value={f.short}>
+                    {f.short} – {f.name}
+                  </option>
+                ))}
+              </select>
             </div>
             <div>
-              <label className="block font-semibold text-slate-700 mb-1">Program Studi</label>
-              <input
-                type="text"
-                disabled
-                value={groupData.studyProgram || ''}
-                className="w-full px-3 py-2 bg-slate-100 border border-slate-200 rounded-xl text-slate-500 cursor-not-allowed"
-              />
+              <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
+                Program Studi <span className="text-rose-500">*</span>
+              </label>
+              <select
+                value={groupData.studyProgram || (availablePrograms[0] || '')}
+                onChange={handleStudyProgramChange}
+                className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:border-amber-500 cursor-pointer"
+              >
+                {availablePrograms.map((prog, idx) => (
+                  <option key={idx} value={prog}>
+                    {prog}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="sm:col-span-2">
