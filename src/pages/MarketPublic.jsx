@@ -153,23 +153,73 @@ Mohon informasi ketersediaan stok, opsi pengiriman, dan estimasi ongkos kirim. T
     }`}>
       
       {/* ========================================================= */}
-      {/* 1. AGRODYKE & MENOKEN HERO SECTION                       */}
+      {/* 1. AGRODYKE & MENOKEN HERO SECTION (WITH 3D DIORAMA)      */}
       {/* ========================================================= */}
       <section className={`relative overflow-hidden pt-8 pb-14 border-b ${
         isDark 
           ? 'bg-gradient-to-b from-[#081726] via-[#060f1c] to-[#060c18] border-slate-800/80' 
           : 'bg-gradient-to-b from-[#fefbf0] via-[#fbf8ed] to-[#faf9f5] border-amber-200/50'
       }`}>
+        {/* Dark Mode Ambient Papua Rainforest Canopy Backdrop */}
+        {isDark && (
+          <div className="absolute top-0 inset-x-0 h-full overflow-hidden opacity-20 mix-blend-screen pointer-events-none select-none z-0">
+            <img
+              src="/papua_misty_rainforest.png"
+              alt="Hutan Tropis Papua"
+              className="w-full h-full object-cover object-center scale-105 filter saturate-125"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#081726]/30 via-[#060f1c]/70 to-[#060c18]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#060c18]/90 via-transparent to-[#060c18]/90" />
+          </div>
+        )}
+
+        {/* Dark Mode Authentic Ethnic Totem Motif Silhouette */}
+        {isDark && (
+          <div className="absolute right-0 top-0 bottom-0 w-36 opacity-15 mix-blend-screen pointer-events-none overflow-hidden select-none z-0">
+            <img
+              src="/papua_ethnic_totem_strip.png"
+              alt="Motif Etnik Papua"
+              className="h-full object-cover object-left opacity-70"
+            />
+          </div>
+        )}
+
+        {/* Bioluminescent Rainforest Fireflies (Kunang-Kunang Rimba Papua) */}
+        {isDark && (
+          <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 select-none">
+            {[
+              { left: '12%', top: '20%', dur: '3.6s', delay: '0.2s' },
+              { left: '22%', top: '65%', dur: '4.4s', delay: '1.2s' },
+              { left: '38%', top: '25%', dur: '3.1s', delay: '0.6s' },
+              { left: '62%', top: '40%', dur: '4.8s', delay: '1.9s' },
+              { left: '85%', top: '20%', dur: '3.9s', delay: '0.9s' },
+              { left: '75%', top: '75%', dur: '3.5s', delay: '2.3s' },
+              { left: '50%', top: '80%', dur: '4.2s', delay: '1.5s' }
+            ].map((f, idx) => (
+              <span
+                key={idx}
+                className="absolute w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_10px_#f59e0b] animate-ping opacity-60"
+                style={{
+                  left: f.left,
+                  top: f.top,
+                  animationDuration: f.dur,
+                  animationDelay: f.delay
+                }}
+              />
+            ))}
+          </div>
+        )}
+
         {/* Glow accents */}
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-10">
             
             {/* Left Column: Heading & Mission */}
-            <div className="max-w-2xl text-left space-y-4">
+            <div className="flex-1 max-w-2xl text-left space-y-4">
               
               {/* Category Pill Tag (Agrodyke Style) */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-600/15 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-black uppercase tracking-wider">
@@ -220,41 +270,114 @@ Mohon informasi ketersediaan stok, opsi pengiriman, dan estimasi ongkos kirim. T
 
             </div>
 
-            {/* Right Column: Agrodyke Trust Metrics Cards */}
-            <div className="w-full lg:w-auto shrink-0 grid grid-cols-2 gap-4 sm:gap-6">
-              
-              <div className={`p-5 rounded-3xl border shadow-sm flex flex-col justify-between ${
-                isDark ? 'bg-slate-900/70 border-slate-800' : 'bg-white/90 border-amber-200/60'
-              }`}>
-                <div className="text-3xl sm:text-4xl font-black text-emerald-500">8</div>
-                <div className="mt-2 text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">Fakultas Terpadu</div>
-                <div className="text-[11px] text-slate-500 dark:text-slate-400">FEB, FST, FKIP, FISIP, FH, FK, FKM, FMIPA</div>
-              </div>
+            {/* Right Column: 3D Illustrated Showcase & Cultural Diorama Card */}
+            <div className="w-full lg:w-[480px] xl:w-[530px] shrink-0 relative">
+              {/* Card Ambient Glow Aura */}
+              <div className="absolute -inset-1.5 bg-gradient-to-r from-emerald-500/25 via-teal-500/20 to-amber-500/25 rounded-[36px] blur-xl opacity-70 pointer-events-none" />
 
-              <div className={`p-5 rounded-3xl border shadow-sm flex flex-col justify-between ${
-                isDark ? 'bg-slate-900/70 border-slate-800' : 'bg-white/90 border-amber-200/60'
+              {/* Main Diorama Card Frame */}
+              <div className={`relative rounded-[32px] border p-4 sm:p-5 transition-all duration-300 shadow-2xl backdrop-blur-xl ${
+                isDark 
+                  ? 'bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-[#081726]/95 border-emerald-500/30 shadow-emerald-950/60' 
+                  : 'bg-white/95 border-amber-200/80 shadow-amber-900/10'
               }`}>
-                <div className="text-3xl sm:text-4xl font-black text-amber-500">30+</div>
-                <div className="mt-2 text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">Komoditas Siap Kirim</div>
-                <div className="text-[11px] text-slate-500 dark:text-slate-400">Kopi, Kriya, Pangan & Herbal</div>
-              </div>
+                
+                {/* Top Diorama Header */}
+                <div className="flex items-center justify-between gap-3 pb-3 border-b border-slate-800/60 dark:border-slate-800/60 border-slate-200/80">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-500 text-[10.5px] font-black uppercase tracking-wider">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>PASAR MAHASISWA AKTIF 24/7</span>
+                  </div>
+                  <span className="text-[11px] font-bold text-amber-500 flex items-center gap-1">
+                    ★ 4.9 <span className="text-slate-400 font-normal">(Kurasi UPA Uncen)</span>
+                  </span>
+                </div>
 
-              <div className={`p-5 rounded-3xl border shadow-sm flex flex-col justify-between ${
-                isDark ? 'bg-slate-900/70 border-slate-800' : 'bg-white/90 border-amber-200/60'
-              }`}>
-                <div className="text-3xl sm:text-4xl font-black text-cyan-500">100%</div>
-                <div className="mt-2 text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">Legalitas Resmi</div>
-                <div className="text-[11px] text-slate-500 dark:text-slate-400">NIB, P-IRT, Halal & BPOM</div>
-              </div>
+                {/* 3D Visual Stage Window */}
+                <div className="relative mt-3.5 rounded-2xl overflow-hidden aspect-[16/9] bg-slate-950 border border-emerald-500/25 shadow-inner group">
+                  {/* 3D Market Render Background Scene */}
+                  <img
+                    src="/hero_slide_1.jpg"
+                    alt="Pasar Digital SinergiBiz Uncen 3D"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 filter brightness-95 contrast-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/15 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/30 via-transparent to-transparent" />
 
-              <div className={`p-5 rounded-3xl border shadow-sm flex flex-col justify-between ${
-                isDark ? 'bg-slate-900/70 border-slate-800' : 'bg-white/90 border-amber-200/60'
-              }`}>
-                <div className="text-3xl sm:text-4xl font-black text-teal-500">B2B</div>
-                <div className="mt-2 text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">Siap Skala Grosir</div>
-                <div className="text-[11px] text-slate-500 dark:text-slate-400">Kemitraan Hotel, Kafe & BUMN</div>
-              </div>
+                  {/* Floating 3D Noken Bag with warm amber glow (Left) */}
+                  <div className="absolute bottom-1 left-3 sm:left-4 w-20 sm:w-24 drop-shadow-[0_12px_24px_rgba(0,0,0,0.85)] filter drop-shadow-[0_0_14px_rgba(245,158,11,0.5)] pointer-events-none transform -rotate-6 hover:rotate-0 transition-transform duration-300">
+                    <img
+                      src="/noken_pixar_3d.png"
+                      alt="Noken Tradisional Papua 3D"
+                      className="w-full h-auto max-h-20 sm:max-h-24 object-contain animate-bounce"
+                      style={{ animationDuration: '4.5s' }}
+                    />
+                  </div>
 
+                  {/* Floating 3D Mahasiswa Preneur Mascot (Right) */}
+                  <div className="absolute bottom-0 right-2 sm:right-4 w-24 sm:w-28 drop-shadow-[0_12px_24px_rgba(0,0,0,0.85)] filter drop-shadow-[0_0_14px_rgba(16,185,129,0.35)] pointer-events-none">
+                    <img
+                      src="/maskot_mahasiswa_3d.png"
+                      alt="Maskot Mahasiswa Preneur Papua"
+                      className="w-full h-auto max-h-24 sm:max-h-28 object-contain object-bottom"
+                    />
+                  </div>
+
+                  {/* Center Floating Glass Chip */}
+                  <div className="absolute top-2.5 inset-x-2 flex justify-center pointer-events-none">
+                    <div className="px-3 py-1 rounded-xl bg-slate-950/80 backdrop-blur-md border border-white/10 text-white text-[10.5px] font-bold shadow-lg flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                      <span className="truncate">Sentra Kopi Wamena, Kriya Noken & Pangan Lokal</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Integrated Sleek Trust Metrics (4-Grid Pills) */}
+                <div className="mt-3.5 grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  
+                  <div className={`p-2 rounded-2xl border text-center transition-all ${
+                    isDark 
+                      ? 'bg-slate-950/70 border-slate-800/80 hover:border-emerald-500/50' 
+                      : 'bg-emerald-50/90 border-emerald-300/80 shadow-xs'
+                  }`}>
+                    <div className={`text-lg sm:text-xl font-black ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`}>8</div>
+                    <div className={`text-[10px] font-black uppercase tracking-wider ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>Fakultas</div>
+                    <div className={`text-[9px] font-semibold truncate ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>FEB, FST, FKIP +5</div>
+                  </div>
+
+                  <div className={`p-2 rounded-2xl border text-center transition-all ${
+                    isDark 
+                      ? 'bg-slate-950/70 border-slate-800/80 hover:border-amber-500/50' 
+                      : 'bg-amber-50/90 border-amber-300/80 shadow-xs'
+                  }`}>
+                    <div className={`text-lg sm:text-xl font-black ${isDark ? 'text-amber-400' : 'text-amber-700'}`}>30+</div>
+                    <div className={`text-[10px] font-black uppercase tracking-wider ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>Komoditas</div>
+                    <div className={`text-[9px] font-semibold truncate ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Kopi, Kriya, Sagu</div>
+                  </div>
+
+                  <div className={`p-2 rounded-2xl border text-center transition-all ${
+                    isDark 
+                      ? 'bg-slate-950/70 border-slate-800/80 hover:border-cyan-500/50' 
+                      : 'bg-cyan-50/90 border-cyan-300/80 shadow-xs'
+                  }`}>
+                    <div className={`text-lg sm:text-xl font-black ${isDark ? 'text-cyan-400' : 'text-cyan-700'}`}>100%</div>
+                    <div className={`text-[10px] font-black uppercase tracking-wider ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>Legalitas</div>
+                    <div className={`text-[9px] font-semibold truncate ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>NIB, P-IRT, Halal</div>
+                  </div>
+
+                  <div className={`p-2 rounded-2xl border text-center transition-all ${
+                    isDark 
+                      ? 'bg-slate-950/70 border-slate-800/80 hover:border-teal-500/50' 
+                      : 'bg-teal-50/90 border-teal-300/80 shadow-xs'
+                  }`}>
+                    <div className={`text-lg sm:text-xl font-black ${isDark ? 'text-teal-400' : 'text-teal-700'}`}>B2B</div>
+                    <div className={`text-[10px] font-black uppercase tracking-wider ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>Grosir</div>
+                    <div className={`text-[9px] font-semibold truncate ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Hotel & BUMN</div>
+                  </div>
+
+                </div>
+
+              </div>
             </div>
 
           </div>
@@ -438,13 +561,20 @@ Mohon informasi ketersediaan stok, opsi pengiriman, dan estimasi ongkos kirim. T
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         
         {filteredProducts.length === 0 ? (
-          <div className={`p-12 rounded-3xl border text-center space-y-4 ${
-            isDark ? 'bg-slate-900/60 border-slate-800' : 'bg-white border-slate-200'
+          <div className={`p-12 sm:p-16 rounded-3xl border text-center space-y-4 ${
+            isDark ? 'bg-slate-900/70 border-slate-800 backdrop-blur-md' : 'bg-white border-slate-200 shadow-sm'
           }`}>
-            <Store className="w-14 h-14 text-slate-400 mx-auto" />
-            <h3 className="text-lg font-bold">Produk Tidak Ditemukan</h3>
+            <div className="relative mx-auto w-24 h-24 flex items-center justify-center">
+              <div className="absolute inset-0 bg-amber-500/20 rounded-full blur-xl animate-pulse" />
+              <img
+                src="/noken_pixar_3d.png"
+                alt="Noken Kosong"
+                className="relative w-20 h-20 object-contain drop-shadow-[0_10px_20px_rgba(245,158,11,0.4)]"
+              />
+            </div>
+            <h3 className="text-lg font-bold">Produk Belum Ditemukan</h3>
             <p className="text-xs text-slate-500 max-w-md mx-auto">
-              Tidak ada produk yang cocok dengan kombinasi kata kunci atau filter saat ini. Silakan coba atur ulang filter pencarian Anda.
+              Tidak ada komoditas yang cocok dengan kata kunci atau filter saat ini. Coba kata kunci seperti <em>"kopi"</em>, <em>"noken"</em>, <em>"sagu"</em>, atau atur ulang filter pencarian Anda.
             </p>
             <button
               onClick={() => {
