@@ -61,11 +61,16 @@ const setItem = (key, val) => {
 // Master Data
 export const getMasterData = () => {
   const data = getItem(STORAGE_KEYS.MASTER, INITIAL_MASTER_DATA);
-  if (!data || !data.faculties || data.faculties.length < INITIAL_MASTER_DATA.faculties.length) {
-    return {
-      ...data,
+  const initialTotalProdi = INITIAL_MASTER_DATA.faculties.reduce((sum, f) => sum + (f.programs?.length || 0), 0);
+  const currentTotalProdi = (data?.faculties || []).reduce((sum, f) => sum + (f.programs?.length || 0), 0);
+
+  if (!data || !data.faculties || currentTotalProdi < initialTotalProdi) {
+    const updated = {
+      ...(data || {}),
       faculties: INITIAL_MASTER_DATA.faculties
     };
+    setItem(STORAGE_KEYS.MASTER, updated);
+    return updated;
   }
   return data;
 };

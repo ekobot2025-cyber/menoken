@@ -7,15 +7,18 @@ export const INITIAL_MASTER_DATA = {
       name: "Fakultas Ekonomi dan Bisnis",
       short: "FEB",
       programs: [
-        "S1 Manajemen",
+        "D3 Administrasi Perkantoran",
         "S1 Akuntansi",
         "S1 Ekonomi Pembangunan",
-        "D3 Akuntansi",
-        "D3 Keuangan & Perbankan",
-        "S2 Magister Manajemen (MM)",
-        "S2 Magister Ilmu Ekonomi (MIE)",
-        "S2 Magister Keuangan Daerah",
-        "S3 Doktor Ilmu Manajemen"
+        "S1 Manajemen",
+        "S1 Manajemen Administrasi Perkantoran",
+        "S2 Akuntansi",
+        "S2 Ilmu Ekonomi",
+        "S2 Manajemen",
+        "S2 Manajemen Koperasi",
+        "S2 Keuangan Daerah",
+        "S3 Ilmu Ekonomi",
+        "S3 Ilmu Manajemen"
       ]
     },
     {
@@ -23,22 +26,35 @@ export const INITIAL_MASTER_DATA = {
       name: "Fakultas Keguruan dan Ilmu Pendidikan",
       short: "FKIP",
       programs: [
+        "S1 Bimbingan Dan Konseling",
+        "S1 Pendidikan Bahasa Dan Sastra Indonesia",
         "S1 Pendidikan Bahasa Inggris",
-        "S1 Pendidikan Bahasa dan Sastra Indonesia",
         "S1 Pendidikan Biologi",
-        "S1 Pendidikan Matematika",
         "S1 Pendidikan Fisika",
-        "S1 Pendidikan Kimia",
-        "S1 Pendidikan Guru Sekolah Dasar (PGSD)",
-        "S1 Pendidikan Guru PAUD (PGPAUD)",
-        "S1 Pendidikan Jasmani, Kesehatan dan Rekreasi (PJKR)",
         "S1 Pendidikan Geografi",
+        "S1 Pendidikan Guru PAUD (PGPAUD)",
+        "S1 Pendidikan Guru Sekolah Dasar (PGSD)",
+        "S1 PJJ Pendidikan Guru Sekolah Dasar (PGSD)",
+        "S1 Pendidikan Ilmu Pengetahuan Alam (IPA)",
+        "S1 Pendidikan Jasmani, Kesehatan & Rekreasi (PJKR)",
+        "S1 Pendidikan Kepelatihan Olahraga",
+        "S1 Pendidikan Kimia",
+        "S1 Pendidikan Matematika",
+        "S1 Pendidikan Pancasila Dan Kewarganegaraan (PPKn)",
         "S1 Pendidikan Sejarah",
-        "S1 Pendidikan Pancasila dan Kewarganegaraan (PPKn)",
-        "S1 Bimbingan dan Konseling",
-        "S2 Pendidikan IPS",
+        "S1 Manajemen Pendidikan",
+        "S1 Ilmu Keolahragaan",
+        "Profesi Pendidikan Profesi Guru (PPG)",
+        "S2 Bimbingan dan Konseling",
+        "S2 Manajemen Pendidikan",
+        "S2 Pendidikan Bahasa Dan Sastra Indonesia",
         "S2 Pendidikan Bahasa Inggris",
-        "S2 Manajemen Pendidikan"
+        "S2 Pendidikan Dasar",
+        "S2 Pendidikan IPS",
+        "S2 Pendidikan IPA",
+        "S2 Pendidikan Kewarganegaraan",
+        "S2 Pendidikan Matematika",
+        "S2 Pendidikan Olahraga"
       ]
     },
     {
@@ -46,17 +62,18 @@ export const INITIAL_MASTER_DATA = {
       name: "Fakultas Matematika dan Ilmu Pengetahuan Alam",
       short: "FMIPA",
       programs: [
-        "S1 Matematika",
-        "S1 Fisika",
-        "S1 Kimia",
         "S1 Biologi",
         "S1 Farmasi",
-        "S1 Sistem Informasi",
-        "S1 Ilmu Kelautan",
-        "S1 Statistika",
+        "S1 Fisika",
         "S1 Geofisika",
-        "D3 Farmasi",
-        "S2 Magister Biologi"
+        "S1 Ilmu Kelautan",
+        "S1 Ilmu Kelautan (Kampus Kabupaten Biak Numfor)",
+        "S1 Ilmu Perikanan",
+        "S1 Kimia",
+        "S1 Matematika",
+        "S1 Sistem Informasi",
+        "S1 Statistika",
+        "S2 Biologi"
       ]
     },
     {
@@ -64,35 +81,22 @@ export const INITIAL_MASTER_DATA = {
       name: "Fakultas Ilmu Sosial dan Ilmu Politik",
       short: "FISIP",
       programs: [
-        "S1 Ilmu Administrasi Publik",
-        "S1 Ilmu Administrasi Bisnis",
-        "S1 Ilmu Pemerintahan",
-        "S1 Ilmu Komunikasi",
-        "S1 Sosiologi",
-        "S1 Hubungan Internasional",
         "S1 Antropologi Sosial",
+        "S1 Hubungan Internasional",
+        "S1 Hubungan Internasional (Kampus Kabupaten Biak)",
+        "S1 Ilmu Administrasi Negara",
         "S1 Ilmu Kesejahteraan Sosial",
-        "S2 Magister Ilmu Administrasi Publik",
-        "S2 Magister Sosiologi",
-        "S3 Doktor Ilmu Sosial"
-      ]
-    },
-    {
-      id: "ft",
-      name: "Fakultas Teknik",
-      short: "FT",
-      programs: [
-        "S1 Teknik Sipil",
-        "S1 Teknik Mesin",
-        "S1 Teknik Elektro",
-        "S1 Teknik Pertambangan",
-        "S1 Teknik Informatika",
-        "S1 Perencanaan Wilayah dan Kota (PWK)",
-        "S1 Teknik Lingkungan",
-        "D3 Teknik Sipil",
-        "D3 Teknik Mesin",
-        "D3 Teknik Elektro",
-        "S2 Magister Teknik Sipil"
+        "S1 Ilmu Pemerintahan",
+        "S1 Ilmu Perpustakaan",
+        "S1 Pariwisata",
+        "S1 Psikologi",
+        "S1 Sosiologi",
+        "S2 Antropologi",
+        "S2 Ilmu Administrasi Publik",
+        "S2 Ilmu Pemerintahan",
+        "S2 Kebijakan Publik",
+        "S2 Sosiologi",
+        "S3 Ilmu Sosial"
       ]
     },
     {
@@ -101,8 +105,30 @@ export const INITIAL_MASTER_DATA = {
       short: "FH",
       programs: [
         "S1 Ilmu Hukum",
-        "S2 Magister Ilmu Hukum",
-        "S3 Doktor Ilmu Hukum"
+        "S2 Ilmu Hukum",
+        "S2 Kenotariatan"
+      ]
+    },
+    {
+      id: "ft",
+      name: "Fakultas Teknik",
+      short: "FT",
+      programs: [
+        "D3 Teknik Sipil",
+        "D3 Teknik Mesin",
+        "D3 Teknik Elektronika",
+        "D3 Teknik Mineral",
+        "D3 Teknologi Listrik",
+        "S1 Teknik Sipil",
+        "S1 Teknik Mesin",
+        "S1 Teknik Elektro",
+        "S1 Teknik Pertambangan",
+        "S1 Teknik Geologi",
+        "S1 Planologi (PWK)",
+        "S1 Teknologi Pangan",
+        "S2 Teknik Sipil",
+        "S2 Perencanaan Wilayah dan Kota (PWK)",
+        "S2 Rekayasa Energi Terbarukan"
       ]
     },
     {
@@ -110,11 +136,12 @@ export const INITIAL_MASTER_DATA = {
       name: "Fakultas Kedokteran",
       short: "FK",
       programs: [
+        "D3 Keperawatan",
         "S1 Pendidikan Dokter",
-        "Profesi Dokter",
         "S1 Ilmu Keperawatan",
+        "Profesi Dokter",
         "Profesi Ners",
-        "S1 Farmasi Klinis"
+        "Sp-1 Anestesiologi dan Terapi Intensif"
       ]
     },
     {
@@ -123,8 +150,7 @@ export const INITIAL_MASTER_DATA = {
       short: "FKM",
       programs: [
         "S1 Ilmu Kesehatan Masyarakat",
-        "S1 Ilmu Gizi",
-        "S2 Magister Kesehatan Masyarakat"
+        "S2 Ilmu Kesehatan Masyarakat"
       ]
     },
     {
@@ -132,8 +158,7 @@ export const INITIAL_MASTER_DATA = {
       name: "Program Pascasarjana",
       short: "PPs",
       programs: [
-        "S2 Magister Ilmu Lingkungan",
-        "S3 Doktor Ilmu Lingkungan"
+        "S2 Pengelolaan Sumberdaya Alam dan Lingkungan (PSDAL)"
       ]
     }
   ],
